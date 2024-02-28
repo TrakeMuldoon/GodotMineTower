@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world.gd" id="1_473pk"]
 [ext_resource type="PackedScene" uid="uid://f6l3he8ki1b4" path="res://worldlevel.tscn" id="3_lfjce"]
-[ext_resource type="PackedScene" uid="uid://bhd3na60mj5w0" path="res://backup_character.tscn" id="4_ietxa"]
+[ext_resource type="PackedScene" uid="uid://bhd3na60mj5w0" path="res://tank_character.tscn" id="4_ietxa"]
 [ext_resource type="PackedScene" uid="uid://caewvun7a74qq" path="res://hud.tscn" id="5_di036"]
 
 [node name="World" type="Node"]
@@ -12,9 +12,9 @@ script = ExtResource("1_473pk")
 
 [node name="StartPosition" type="Marker2D" parent="."]
 
-[node name="BackupCharacter" parent="." instance=ExtResource("4_ietxa")]
+[node name="TankCharacter" parent="." instance=ExtResource("4_ietxa")]
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="BackupCharacter"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="TankCharacter"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="HUD" parent="." instance=ExtResource("5_di036")]
@@ -29,6 +29,6 @@ drag_left_margin = 0.5
 drag_right_margin = 0.5
 drag_bottom_margin = 0.1
 
-[connection signal="build_wall" from="BackupCharacter" to="WorldLevel" method="_on_backup_character_build_wall"]
-[connection signal="character_moved" from="BackupCharacter" to="HUD" method="_on_backup_character_character_moved"]
-[connection signal="drilled" from="BackupCharacter" to="WorldLevel" method="_on_backup_character_drilled"]
+[connection signal="build_wall" from="TankCharacter" to="WorldLevel" method="_on_backup_character_build_wall"]
+[connection signal="character_moved" from="TankCharacter" to="HUD" method="_on_backup_character_character_moved"]
+[connection signal="drilled" from="TankCharacter" to="WorldLevel" method="_on_backup_character_drilled"]
