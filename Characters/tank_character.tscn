@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bhd3na60mj5w0"]
 
 [ext_resource type="Texture2D" uid="uid://d4ig3rk6l42ff" path="res://assets/MineBird.png" id="1_nnluh"]
-[ext_resource type="Script" path="res://tank_character.gd" id="1_p4ov2"]
+[ext_resource type="Script" path="res://Characters/tank_character.gd" id="1_p4ov2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6r37p"]
 atlas = ExtResource("1_nnluh")

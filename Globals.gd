@@ -4,11 +4,10 @@ var RANDOM_SEED = 148723458
 
 var CELL_SIZE = 64
 
-var CELLS_VISITED = {
+var CELLS_DRILLED = {
 }
-var MOST_RECENT_CELL_ENTERED = Vector2.ZERO
+var WALLS_BUILT = {
+}
 
-var PlayerWorldPosition = Vector2.ZERO
-var WorldLevelTopLeftScreenPosition = Vector2.ZERO
 
 
