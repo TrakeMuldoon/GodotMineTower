@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhd3na60mj5w0"]
+
+[ext_resource type="Texture2D" uid="uid://d4ig3rk6l42ff" path="res://assets/MineBird.png" id="1_nnluh"]
+[ext_resource type="Script" path="res://backup_character.gd" id="1_p4ov2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r37p"]
+atlas = ExtResource("1_nnluh")
+region = Rect2(0, 0, 67, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ni3h"]
+atlas = ExtResource("1_nnluh")
+region = Rect2(67, 0, 67, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7m0i"]
+atlas = ExtResource("1_nnluh")
+region = Rect2(134, 0, 67, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awoi8"]
+atlas = ExtResource("1_nnluh")
+region = Rect2(201, 0, 67, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8i8wp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r37p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ni3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7m0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awoi8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qdwok"]
+radius = 28.0
+height = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vov6b"]
+radius = 7.07107
+
+[node name="BackupCharacter" type="CharacterBody2D"]
+script = ExtResource("1_p4ov2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_8i8wp")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.843159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qdwok")
+
+[node name="Headroom" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Headroom"]
+position = Vector2(0, -36)
+shape = SubResource("CircleShape2D_vov6b")

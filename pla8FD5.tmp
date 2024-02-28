@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqudqx6edso15"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_oecbk"]
+[ext_resource type="Texture2D" uid="uid://b5lmaos33t6sy" path="res://assets/Minecart1.png" id="2_2ti1u"]
+[ext_resource type="Texture2D" uid="uid://2r2qx1ofgq2k" path="res://assets/Minecart3.png" id="3_ptnyt"]
+[ext_resource type="Texture2D" uid="uid://dd136m6rflxob" path="res://assets/Minecart2.png" id="4_uav6x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_11b3w"]
+radius = 39.0
+height = 142.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdc64"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2ti1u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ptnyt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uav6x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_oecbk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_11b3w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cdc64")
+frame = 1
+frame_progress = 0.671012
+
+[node name="PathCounter" type="Label" parent="."]
+offset_top = -38.0
+offset_right = 48.0
+offset_bottom = -15.0
+text = "PathLength"
+
+[node name="WorldPosition" type="Label" parent="."]
+offset_top = -18.0
+offset_right = 40.0
+offset_bottom = 5.0
+text = "World"
+
+[node name="PlayerPosition" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

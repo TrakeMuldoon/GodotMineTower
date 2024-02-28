@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhd3na60mj5w0"]
+
+[ext_resource type="Texture2D" uid="uid://d4ig3rk6l42ff" path="res://assets/MineBird.png" id="1_nnluh"]
+[ext_resource type="Script" path="res://backup_character.gd" id="1_p4ov2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qdwok"]
+radius = 27.0
+height = 60.0
+
+[node name="BackupCharacter" type="CharacterBody2D"]
+script = ExtResource("1_p4ov2")
+
+[node name="MineBird" type="Sprite2D" parent="."]
+texture = ExtResource("1_nnluh")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qdwok")

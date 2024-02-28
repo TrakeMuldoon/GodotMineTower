@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://dxw8rgfbnngi0"]
+
+[ext_resource type="Texture2D" uid="uid://bnqhvbp0iw3px" path="res://assets/DebugMinecart.png" id="1_flhuu"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_flhuu")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]

@@ -1,0 +1,44 @@
+Mining game idle ish.
+
+You start with a home base and a miner,
+
+Gameplay loop:
+	You drill down, and then return once you run out of fuel(battery), or tether?
+	You find resource nodes, and grab them, or drop miners on them.
+	You then upgrade, and go deeper/further from home base
+
+Big Plans: 
+		After mining, you can upgrade to go to the ocean, clouds and outer space
+			Like Spore, each of these will have essentially the same gameplay loop
+
+Locations:
+	Ground:
+		Fuel Station
+		Export
+		Import
+		Shop
+		Mechanic
+
+	Clouds:
+		Castle
+		SuperMechanic
+	
+	Space:
+		Space Station
+		Asteroid Field
+		
+		Galaxy Map?
+		
+Resources:
+	Coal
+	Iron
+	Copper
+	Gold
+	Platinum
+	Uranium
+	
+	Gasses: 
+		Hydrogen
+		Oxygen
+		Nitrogen
+		Helium

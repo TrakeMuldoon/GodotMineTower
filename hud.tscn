@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://caewvun7a74qq"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_bk74e"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_bk74e")
+
+[node name="PlayerLocation" type="Label" parent="."]
+offset_left = 11.0
+offset_top = 10.0
+offset_right = 135.0
+offset_bottom = 33.0
+text = "Player Location: 
+"
+
+[node name="TileMapLocation" type="Label" parent="."]
+offset_left = 168.0
+offset_top = 10.0
+offset_right = 305.0
+offset_bottom = 37.0
+text = "Tilemap Location:"
+
+[node name="CameraLocation" type="Label" parent="."]
+offset_left = 171.0
+offset_top = 43.0
+offset_right = 302.0
+offset_bottom = 66.0
+text = "Camera Location"
+
+[node name="Coal" type="Label" parent="."]
+offset_left = 1090.0
+offset_top = 8.0
+offset_right = 1130.0
+offset_bottom = 31.0
+text = "Coal:"
+horizontal_alignment = 2
