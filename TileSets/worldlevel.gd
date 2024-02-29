@@ -24,3 +24,7 @@ func _on_backup_character_build_wall(cell):
 
 func _on_tank_character_mark_my_cell(cell):
 	$GroundMap.MarkX(cell)
+
+
+func _on_tank_character_build_mine(cell):
+	$GroundMap.BuildMine(cell)
