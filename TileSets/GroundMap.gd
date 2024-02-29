@@ -1,11 +1,12 @@
 extends TileMap
 
+var TILESET_ID = 0
+var id = tile_set.get_source_id(TILESET_ID)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
 func CreateInitialTileMap():
-	var id = tile_set.get_source_id(1)
 	for x in range(-50, 50):
 		for y in range(0, 50):
 			var munge_float = munge_three(x,y)
@@ -20,12 +21,12 @@ func CreateInitialTileMap():
 var ground_type = 0
 func PickGroundType(a_float):
 	#return Vector3(1, 1, 0)
-	if a_float < 0.8:
+	if a_float < 0.86:
 		return PickRandomDirt(a_float * 1.25)
-	elif a_float < 0.9:
-		return PickOre((a_float - 0.8) * 10)
-	else:
+	elif a_float < 0.95:
 		return Vector3(4,2,0)
+	else:
+		return PickOre((a_float - 0.95) * 20)
 
 func PickOre(a_float):
 	var pick_int = int(a_float * 100)
@@ -36,7 +37,6 @@ func PickRandomDirt(a_float):
 	return Vector3(pick_int / 4, 0, int(pick_int) % 4)
 
 func BuildWall(cell):
-	var id = tile_set.get_source_id(1)
 	var orig_cell_atlas = get_cell_atlas_coords(0, cell)
 	if orig_cell_atlas.y == 0:
 		return
@@ -45,7 +45,6 @@ func BuildWall(cell):
 	set_cell(0, cell, id, wall_atlas_coords)
 
 func DigThrough(cell):
-	var id = tile_set.get_source_id(1)
 	var orig_cell_atlas = get_cell_atlas_coords(0, cell)
 	
 	var new_atlas_coords = Vector2(5, 2)
