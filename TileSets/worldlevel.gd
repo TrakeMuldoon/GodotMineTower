@@ -20,3 +20,7 @@ func _on_backup_character_drilled(cell):
 
 func _on_backup_character_build_wall(cell):
 	$GroundMap.BuildWall(cell)
+
+
+func _on_tank_character_mark_my_cell(cell):
+	$GroundMap.MarkX(cell)

@@ -36,10 +36,14 @@ func PickRandomDirt(a_float):
 	var pick_int = a_float *  16
 	return Vector3(pick_int / 4, 0, int(pick_int) % 4)
 
+func MarkX(cell):
+	var deb_id = tile_set.get_source_id(1)
+	set_cell(0, cell, deb_id, Vector2(11,1))
+
 func BuildWall(cell):
 	var orig_cell_atlas = get_cell_atlas_coords(0, cell)
-	if orig_cell_atlas.y == 0:
-		return
+	#if orig_cell_atlas.y == 0:
+	#	return
 	
 	var wall_atlas_coords = Vector2(0,3)
 	set_cell(0, cell, id, wall_atlas_coords)
@@ -47,12 +51,11 @@ func BuildWall(cell):
 func DigThrough(cell):
 	var orig_cell_atlas = get_cell_atlas_coords(0, cell)
 	
-	var new_atlas_coords = Vector2(5, 2)
+	var new_atlas_coords = Vector2(5, 2) #Empty
 	if orig_cell_atlas.y == 1:
 		#we hit ore!!!
 		new_atlas_coords.x = orig_cell_atlas.x + 4
 		new_atlas_coords.y = orig_cell_atlas.y
-
 	set_cell(0, cell, id, new_atlas_coords)
 
 func munge_three(x, y):

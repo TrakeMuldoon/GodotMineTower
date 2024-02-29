@@ -49,6 +49,9 @@ radius = 7.07107
 [node name="BackupCharacter" type="CharacterBody2D"]
 script = ExtResource("1_p4ov2")
 
+[node name="MarkPos" type="Marker2D" parent="."]
+position = Vector2(3, 20)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_8i8wp")

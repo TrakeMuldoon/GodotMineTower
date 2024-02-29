@@ -32,3 +32,4 @@ drag_bottom_margin = 0.1
 [connection signal="build_wall" from="TankCharacter" to="WorldLevel" method="_on_backup_character_build_wall"]
 [connection signal="character_moved" from="TankCharacter" to="HUD" method="_on_backup_character_character_moved"]
 [connection signal="drilled" from="TankCharacter" to="WorldLevel" method="_on_backup_character_drilled"]
+[connection signal="mark_my_cell" from="TankCharacter" to="WorldLevel" method="_on_tank_character_mark_my_cell"]

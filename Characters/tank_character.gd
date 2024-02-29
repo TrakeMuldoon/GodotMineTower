@@ -5,6 +5,7 @@ extends CharacterBody2D
 signal character_moved
 signal drilled
 signal build_wall
+signal mark_my_cell
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -16,6 +17,12 @@ func _ready():
 var drill_down_counter = 0
 var drill_side_counter = 0
 func _physics_process(delta):
+	if Input.is_action_just_pressed("Mark"):
+		Get_My_Cell()
+	
+	if Input.is_action_pressed("Mine") and is_on_floor():
+		pass
+	
 	if Input.is_action_just_pressed("Wall") and is_on_floor():
 		Build_Wall_Maybe()
 	# Add the gravity.
@@ -60,11 +67,9 @@ func _physics_process(delta):
 
 	character_moved.emit(position)
 
-func Build_Wall_Maybe():
-	if $Headroom.has_overlapping_bodies():
-		return
-	velocity.y = Jump_Velocity * 0.1
-	var pos = Vector2(position.x, position.y)
+func Get_My_Cell():
+	#var pos = Vector2(position.x, position.y)
+	var pos = $MarkPos.global_position
 	var l2m = tilemap.local_to_map(pos)
 	if l2m.y < 0:
 		l2m.y -= 4
@@ -72,15 +77,24 @@ func Build_Wall_Maybe():
 		l2m.x -= 4
 	l2m.y = l2m.y / 4
 	l2m.x = l2m.x / 4
-	position.y -= 64
-	build_wall.emit(l2m)
+	#mark_my_cell.emit(l2m)
+	return l2m
+
+func Build_Wall_Maybe():
+	if $Headroom.has_overlapping_bodies():
+		return
+
+	var my_loc = Get_My_Cell()
+	
+	position.y -= 64 # move me out of the way
+	velocity.y = Jump_Velocity * 0.1
+	
+	build_wall.emit(my_loc)
 
 func Drill_Down():
 	velocity.y = Jump_Velocity * 0.1
 	var pos = Vector2(position.x, position.y + 32)
 	var l2m = tilemap.local_to_map(pos)
-	#if l2m.y < 0:
-	#	l2m.y -= 4
 	if l2m.x < 0:
 		l2m.x -= 4
 	l2m.y = l2m.y / 4
