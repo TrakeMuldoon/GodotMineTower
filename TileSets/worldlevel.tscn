@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://f6l3he8ki1b4"]
+
+[ext_resource type="Script" path="res://TileSets/worldlevel.gd" id="1_7cmyl"]
+[ext_resource type="TileSet" uid="uid://bo1kk6u7y33d7" path="res://TileSets/worldlevel.tres" id="2_ifyyd"]
+[ext_resource type="Script" path="res://TileSets/GroundMap.gd" id="3_xeljv"]
+
+[node name="WorldLevel" type="Node2D"]
+script = ExtResource("1_7cmyl")
+
+[node name="GroundMap" type="TileMap" parent="."]
+scale = Vector2(4, 4)
+tile_set = ExtResource("2_ifyyd")
+format = 2
+script = ExtResource("3_xeljv")

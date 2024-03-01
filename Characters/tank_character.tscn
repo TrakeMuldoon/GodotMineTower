@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bhd3na60mj5w0"]
 
 [ext_resource type="Texture2D" uid="uid://d4ig3rk6l42ff" path="res://assets/MineBird.png" id="1_nnluh"]
-[ext_resource type="Script" path="res://backup_character.gd" id="1_p4ov2"]
+[ext_resource type="Script" path="res://Characters/tank_character.gd" id="1_p4ov2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6r37p"]
 atlas = ExtResource("1_nnluh")
@@ -49,12 +49,15 @@ radius = 7.07107
 [node name="BackupCharacter" type="CharacterBody2D"]
 script = ExtResource("1_p4ov2")
 
+[node name="MarkPos" type="Marker2D" parent="."]
+position = Vector2(3, 20)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_8i8wp")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.843159
+frame_progress = 0.381599
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

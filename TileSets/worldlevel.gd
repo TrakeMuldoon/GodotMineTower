@@ -5,7 +5,6 @@ extends Node2D
 func _ready():
 	$GroundMap.CreateInitialTileMap()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -21,3 +20,11 @@ func _on_backup_character_drilled(cell):
 
 func _on_backup_character_build_wall(cell):
 	$GroundMap.BuildWall(cell)
+
+
+func _on_tank_character_mark_my_cell(cell):
+	$GroundMap.MarkX(cell)
+
+
+func _on_tank_character_build_mine(cell):
+	$GroundMap.BuildMine(cell)

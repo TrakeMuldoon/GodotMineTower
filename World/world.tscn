@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ikyyrfbbl6mg"]
+
+[ext_resource type="Script" path="res://World/world.gd" id="1_s4pm6"]
+[ext_resource type="PackedScene" uid="uid://f6l3he8ki1b4" path="res://TileSets/worldlevel.tscn" id="2_ufl5l"]
+[ext_resource type="PackedScene" uid="uid://bhd3na60mj5w0" path="res://Characters/tank_character.tscn" id="3_t8821"]
+[ext_resource type="PackedScene" uid="uid://caewvun7a74qq" path="res://HUD/hud.tscn" id="4_xx605"]
+
+[node name="World" type="Node"]
+script = ExtResource("1_s4pm6")
+
+[node name="WorldLevel" parent="." instance=ExtResource("2_ufl5l")]
+
+[node name="StartPosition" type="Marker2D" parent="."]
+
+[node name="TankCharacter" parent="." instance=ExtResource("3_t8821")]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="TankCharacter"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="HUD" parent="." instance=ExtResource("4_xx605")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.1
+
+[connection signal="build_mine" from="TankCharacter" to="WorldLevel" method="_on_tank_character_build_mine"]
+[connection signal="build_wall" from="TankCharacter" to="WorldLevel" method="_on_backup_character_build_wall"]
+[connection signal="character_moved" from="TankCharacter" to="HUD" method="_on_backup_character_character_moved"]
+[connection signal="drilled" from="TankCharacter" to="WorldLevel" method="_on_backup_character_drilled"]
+[connection signal="mark_my_cell" from="TankCharacter" to="WorldLevel" method="_on_tank_character_mark_my_cell"]

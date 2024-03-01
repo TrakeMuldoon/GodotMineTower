@@ -1,0 +1,60 @@
+R 
+- Return home, without inventory.
+
+Inventory
+- Ability to mine and carry ores
+
+Fuel
+- Fuel which runs out as you drive or fly
+
+Fuel Station / Store / Mechanic
+- Sell inventory for things, Refuel
+
+Mine-income 
+- Mines generate consistent income with some animation
+
+Mine Cost
+- Each Mine costs something to build
+
+Add To Inventory
+- Must bring materials
+
+Char Stats -
+	Flight Power
+	Flight Efficiency
+	Drill Speed
+	Drill Efficiency
+	Drill Tip
+	Drive Speed
+	Drive Efficiency
+	Inventory Size
+	Fuel Tank
+Upgrades 
+	- Buy from Mechanic, So. Many. Upgrades
+
+Mines Must be on ground
+
+Build Mechanic
+Build Ore Converter
+Build SuperDrill
+
+Flight Animation - FIRE!
+
+Drill Animation
+ - Drill which is attached to tank, and directions.
+ - Player moves to the place where the drilling goes
+
+Map Generation at Boundaries
+- As the player moves, we need to check if the map has been generated that far out
+
+Caves/Mansions/Clouds
+- We need to have some values create a set of tiles taht combine to create something interesting
+
+Dirt Layers
+	Each with their own drill speed, ore propportions
+
+Rocks!
+	- Undrillable
+
+Sky
+- Create the cloud world!
