@@ -57,7 +57,6 @@ func _physics_process(delta):
 		ACTION_TIMER.Reset("DrillDown")
 	
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("go_left", "go_right")
 	
 	if direction:
