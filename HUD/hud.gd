@@ -7,9 +7,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+var counter = 0
 func _process(delta):
-	pass
-
+	$DrillDown.value = Globals.ACTION_TIMER.GetProgress("DrillDown") * 100
+	$DrillSide.value = Globals.ACTION_TIMER.GetProgress("DrillSide") * 100
+	$ResetBar.value = Globals.ACTION_TIMER.GetProgress("Reset") * 100
 
 func _on_backup_character_character_moved(pos):
 	var scene = get_tree().get_current_scene()

@@ -18,16 +18,16 @@ func _ready():
 
 #var drill_down_counter = 0
 #var drill_side_counter = 0
-var action_timer = ActionTimer.new()
+var ACTION_TIMER = Globals.ACTION_TIMER
 
 func ResetLocation():
 	position = Vector2.ZERO
 
 func _physics_process(delta):
 	if Input.is_action_pressed("Return"):
-		action_timer.ExecOnElapsed("Reset", 25, ResetLocation)
+		ACTION_TIMER.ExecOnElapsed("Reset", ResetLocation)
 	else:
-		action_timer.Reset("Reset")
+		ACTION_TIMER.Reset("Reset")
 	
 	if Input.is_action_just_pressed("Mark"):
 		var cell = Get_My_Cell()
@@ -50,9 +50,9 @@ func _physics_process(delta):
 			velocity.y = Jump_Velocity
 
 	if Input.is_action_pressed("go_down") and is_on_floor():
-		action_timer.ExecOnElapsed("DrillDown", 25, Drill_Down)
+		ACTION_TIMER.ExecOnElapsed("DrillDown", Drill_Down)
 	else:
-		action_timer.Reset("DrillDown")
+		ACTION_TIMER.Reset("DrillDown")
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -60,13 +60,13 @@ func _physics_process(delta):
 	
 	if direction:
 		if is_on_wall() and is_on_floor():
-			if action_timer.CounterElapsed("DrillSide", 25):
+			if ACTION_TIMER.CounterElapsed("DrillSide"):
 				Drill_Side(direction)
-				action_timer.Reset("DrillSide")
+				ACTION_TIMER.Reset("DrillSide")
 			else:
-				action_timer.Increment("DrillSide")
+				ACTION_TIMER.Increment("DrillSide")
 		else:
-			action_timer.Reset("DrillSide")
+			ACTION_TIMER.Reset("DrillSide")
 		velocity.x = direction * Speed
 
 		if velocity.x < 0:
@@ -74,7 +74,7 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite2D.flip_h = false
 	else:
-		action_timer.Reset("DrillSide")
+		ACTION_TIMER.Reset("DrillSide")
 		velocity.x = move_toward(velocity.x, 0, Speed)
 
 	move_and_slide()

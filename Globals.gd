@@ -9,5 +9,7 @@ var CELLS_DRILLED = {
 var WALLS_BUILT = {
 }
 
+var ACTION_TIMEOUT = 30
+var ACTION_TIMER = ActionTimer.new(ACTION_TIMEOUT)
 
 
