@@ -34,7 +34,9 @@ func _physics_process(delta):
 		mark_my_cell.emit(cell)
 	
 	if Input.is_action_pressed("Mine") and is_on_floor():
-		Build_Mine_Maybe()
+		ACTION_TIMER.ExecOnElapsed("BuildMine", Build_Mine_Maybe)
+	else:
+		ACTION_TIMER.Reset("BuildMine")
 	
 	if Input.is_action_just_pressed("Wall") and is_on_floor():
 		Build_Wall_Maybe()

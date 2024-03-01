@@ -35,24 +35,15 @@ offset_bottom = 31.0
 text = "Coal:"
 horizontal_alignment = 2
 
-[node name="DrillDown" type="ProgressBar" parent="."]
+[node name="ActionTimerBar" type="ProgressBar" parent="."]
 offset_left = 1080.0
-offset_top = 70.0
+offset_top = 105.0
 offset_right = 1126.0
-offset_bottom = 77.0
+offset_bottom = 112.0
 show_percentage = false
 
-[node name="DrillSide" type="ProgressBar" parent="."]
+[node name="ActionTimerLabel" type="Label" parent="."]
 offset_left = 1080.0
-offset_top = 55.0
-offset_right = 1126.0
-offset_bottom = 62.0
-value = 0.8
-show_percentage = false
-
-[node name="ResetBar" type="ProgressBar" parent="."]
-offset_left = 1080.0
-offset_top = 40.0
-offset_right = 1126.0
-offset_bottom = 47.0
-show_percentage = false
+offset_top = 85.0
+offset_right = 1120.0
+offset_bottom = 108.0

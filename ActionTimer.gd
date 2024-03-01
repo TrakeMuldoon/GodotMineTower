@@ -22,7 +22,22 @@ func GetProgress(label, timeout=default_timeout):
 	else:
 		return 0
 
+var most_recent = ""
+
+func GetMostRecent():
+	if not most_recent.is_empty():
+		#TODO: This will be a bug in the future, once I start using variable timeouts
+		return {
+			"progress": float(checker[most_recent]) / default_timeout,
+			"label": most_recent
+		}
+	return {
+			"progress": 0,
+			"label": ""
+	}
+
 func Increment(label):
+	most_recent = label
 	if label in checker:
 		checker[label] += 1
 	else:
