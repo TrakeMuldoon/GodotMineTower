@@ -1,6 +1,6 @@
 extends Node
 
-var RANDOM_SEED = 148723458
+var RANDOM_SEED = int(Time.get_unix_time_from_system() * 1000)
 
 var CELL_SIZE = 64
 
