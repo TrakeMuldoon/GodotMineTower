@@ -133,4 +133,4 @@ func Drill_Side(direction):
 	
 
 func _on_world_level_found_ore(ore_name):
-	Globals.TANK_INVENTORY.add_to_inventory(ore_name, 1)
+	Globals.TANK_INVENTORY.add_to_inventory(ore_name, Globals.ORE_PER_NODE_DRILLED)
