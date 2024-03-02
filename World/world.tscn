@@ -34,6 +34,7 @@ drag_left_margin = 0.5
 drag_right_margin = 0.5
 drag_bottom_margin = 0.1
 
+[connection signal="found_ore" from="WorldLevel" to="TankCharacter" method="_on_world_level_found_ore"]
 [connection signal="build_mine" from="TankCharacter" to="WorldLevel" method="_on_tank_character_build_mine"]
 [connection signal="build_wall" from="TankCharacter" to="WorldLevel" method="_on_backup_character_build_wall"]
 [connection signal="character_moved" from="TankCharacter" to="HUD" method="_on_backup_character_character_moved"]

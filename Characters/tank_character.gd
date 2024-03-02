@@ -131,3 +131,6 @@ func Drill_Side(direction):
 	var drill_loc = Vector2(my_loc.x + (direction), my_loc.y)
 	drilled.emit(drill_loc)
 	
+
+func _on_world_level_found_ore(ore_name):
+	Globals.TANK_INVENTORY.add_to_inventory(ore_name, 1)

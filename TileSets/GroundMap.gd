@@ -91,6 +91,9 @@ func DigThrough(cell):
 		new_cell_atlas.x = orig_cell_atlas.x + 1
 		new_cell_atlas.y = orig_cell_atlas.y
 		
+		#TODO: This is currently a hack. The Enum for ores has the same Y index as the ores in the tilemap.
+		#Works quite well for now, but won't necessarily scale
+		found_ore.emit(orig_cell_atlas.y) 
 	else:
 		new_cell_atlas = DRILLED_TILE
 	set_cell(0, cell, id, new_cell_atlas)
