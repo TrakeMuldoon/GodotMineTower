@@ -7,16 +7,18 @@ var EMPTY_TILE = Vector2(4,0)
 var WALL_TILE = Vector2(5,0)
 var DRILLED_TILE = Vector2(6,0)
 
-var COAL_ROOT = Vector2(0,1)
-var COPPER_ROOT = Vector2(0,2)
-var IRON_ROOT = Vector2(0,3)
-var MAG_ROOT = Vector2(0,4)
+var COAL_ROOT = Vector2(0,Globals.UNDERGROUND_RESOURCES.COAL)
+var COPPER_ROOT = Vector2(0,Globals.UNDERGROUND_RESOURCES.COPPER)
+var IRON_ROOT = Vector2(0,Globals.UNDERGROUND_RESOURCES.IRON)
+var MAG_ROOT = Vector2(0,Globals.UNDERGROUND_RESOURCES.MAGNESIUM)
 
 var EMPTY_TILE_V3 = Vector3(EMPTY_TILE.x, EMPTY_TILE.y,0)
 var COAL_ROOT_V3 = Vector3(COAL_ROOT.x, COAL_ROOT.y, 0)
 var COPPER_ROOT_V3 = Vector3(COPPER_ROOT.x, COPPER_ROOT.y, 0)
 var IRON_ROOT_V3 = Vector3(IRON_ROOT.x, IRON_ROOT.y, 0)
 var MAG_ROOT_V3 = Vector3(MAG_ROOT.x, MAG_ROOT.y, 0)
+
+signal found_ore
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -88,6 +90,7 @@ func DigThrough(cell):
 		#we hit ore!!! Move the Tile over by 1, which is the marker for "drilled ore"
 		new_cell_atlas.x = orig_cell_atlas.x + 1
 		new_cell_atlas.y = orig_cell_atlas.y
+		
 	else:
 		new_cell_atlas = DRILLED_TILE
 	set_cell(0, cell, id, new_cell_atlas)

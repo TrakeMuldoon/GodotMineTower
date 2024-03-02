@@ -1,7 +1,9 @@
 R 
 - Return home, without inventory.
 
-Inventory
+--DONE ^
+
+Character Inventory
 - Ability to mine and carry ores
 
 Fuel
@@ -27,10 +29,13 @@ Char Stats -
 	Drill Tip
 	Drive Speed
 	Drive Efficiency
-	Inventory Size
 	Fuel Tank
 Upgrades 
 	- Buy from Mechanic, So. Many. Upgrades
+
+Layers
+- Each World Layer has a different proprortion of ores
+- Each world layer has a different time to drill through
 
 Mines Must be on ground
 

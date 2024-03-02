@@ -8,19 +8,25 @@ signal drilled
 signal build_wall
 signal mark_my_cell
 signal build_mine
+signal inventory_modified
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var tilemap 
+var tilemap
+
+#var tank_inventory
+#var surface_inventory
+var ACTION_TIMER = Globals.ACTION_TIMER
 
 func _ready():
 	tilemap = get_tree().get_current_scene().get_node("WorldLevel").get_node("GroundMap")
-
-#var drill_down_counter = 0
-#var drill_side_counter = 0
-var ACTION_TIMER = Globals.ACTION_TIMER
+	#tank_inventory = Inventory.new(100)
+	#surface_inventory = Inventory.new(1000000)
+	#tank_inventory.inventory_modified.connect(InventoryModified)
+	#surface_inventory.inventory_modified.connect(InventoryModified)
 
 func ResetLocation():
+	Globals.TANK_INVENTORY.add_to_inventory("blah", 5)
 	position = Vector2.ZERO
 
 func _physics_process(delta):

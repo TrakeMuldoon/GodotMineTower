@@ -3,6 +3,8 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Globals.TANK_INVENTORY.inventory_modified.connect(_on_inventory_modified)
+	Globals.GLOBAL_INVENTORY.inventory_modified.connect(_on_inventory_modified)
 	$CameraLocation.text = str(Globals.RANDOM_SEED)
 
 
@@ -23,4 +25,12 @@ func _on_backup_character_character_moved(pos):
 	
 	var modPosition = Vector2((pos.x - 32)/4, (pos.y + 32) / 4)
 	$PlayerLocation.text = "Player Location:\n" + str(pos) + "\n" + str(modPosition) + "\n" + str(l2m)  
+	pass # Replace with function body.
+
+
+func _on_inventory_modified():
+	$TankInventory.text = Globals.TANK_INVENTORY.itemize()
+	$WorldInventory.text = Globals.GLOBAL_INVENTORY.itemize()
+	
+	
 	pass # Replace with function body.
