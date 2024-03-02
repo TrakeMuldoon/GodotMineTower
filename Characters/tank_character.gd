@@ -25,10 +25,6 @@ func _ready():
 	#tank_inventory.inventory_modified.connect(InventoryModified)
 	#surface_inventory.inventory_modified.connect(InventoryModified)
 
-func ResetLocation():
-	Globals.TANK_INVENTORY.add_to_inventory("blah", 5)
-	position = Vector2.ZERO
-
 func _physics_process(delta):
 	if Input.is_action_pressed("Return"):
 		ACTION_TIMER.ExecOnElapsed("Reset", ResetLocation)
@@ -134,3 +130,11 @@ func Drill_Side(direction):
 
 func _on_world_level_found_ore(ore_name):
 	Globals.TANK_INVENTORY.add_to_inventory(ore_name, Globals.ORE_PER_NODE_DRILLED)
+	
+
+func ResetLocation():
+	Globals.TANK_INVENTORY.add_to_inventory("blah", 5)
+	position = Vector2.ZERO
+	var mt = MovingText.new()
+	add_child(mt)
+	mt.go_to_it("Inventory Wiped", 1, 50)

@@ -20,7 +20,18 @@ func add_to_inventory(label, count):
 	inventory_modified.emit()
 	return true
 
-func itemize():
+func remove_from_inventory(label):
+	var value = ores_held[label]
+	ores_held.erase(label)
+	return value
+	
+func get_ores():
+	var ore_list = []
+	for ore in ores_held:
+		ore_list.append(ore)
+	return ore_list
+
+func HUD_printout():
 	var output = "floop\n"
 	for label in ores_held:
 		output += "{lab} :> {val}\n".format({"lab":label, "val":ores_held[label]})

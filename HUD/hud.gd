@@ -29,8 +29,8 @@ func _on_backup_character_character_moved(pos):
 
 
 func _on_inventory_modified():
-	$TankInventory.text = Globals.TANK_INVENTORY.itemize()
-	$WorldInventory.text = Globals.GLOBAL_INVENTORY.itemize()
+	$TankInventory.text = Globals.TANK_INVENTORY.HUD_printout()
+	$WorldInventory.text = Globals.GLOBAL_INVENTORY.HUD_printout()
 	
 	
 	pass # Replace with function body.
