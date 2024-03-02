@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ikyyrfbbl6mg"]
+[gd_scene load_steps=6 format=3 uid="uid://ikyyrfbbl6mg"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_s4pm6"]
 [ext_resource type="PackedScene" uid="uid://f6l3he8ki1b4" path="res://TileSets/worldlevel.tscn" id="2_ufl5l"]
+[ext_resource type="PackedScene" uid="uid://c1n8ykio0swl0" path="res://Buildings/warehouse.tscn" id="3_h2g8o"]
 [ext_resource type="PackedScene" uid="uid://bhd3na60mj5w0" path="res://Characters/tank_character.tscn" id="3_t8821"]
 [ext_resource type="PackedScene" uid="uid://caewvun7a74qq" path="res://HUD/hud.tscn" id="4_xx605"]
 
@@ -11,6 +12,10 @@ script = ExtResource("1_s4pm6")
 [node name="WorldLevel" parent="." instance=ExtResource("2_ufl5l")]
 
 [node name="StartPosition" type="Marker2D" parent="."]
+
+[node name="Warehouse" parent="." instance=ExtResource("3_h2g8o")]
+position = Vector2(500, 0)
+scale = Vector2(2, 2)
 
 [node name="TankCharacter" parent="." instance=ExtResource("3_t8821")]
 

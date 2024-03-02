@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1n8ykio0swl0"]
+
+[ext_resource type="Script" path="res://Buildings/warehouse.gd" id="1_5y1pm"]
+[ext_resource type="Texture2D" uid="uid://bo3dygk67g2sd" path="res://assets/Buildlings.png" id="2_kl8fb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y252h"]
+atlas = ExtResource("2_kl8fb")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1mdxn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y252h")
+}],
+"loop": true,
+"name": &"Building",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b33i"]
+size = Vector2(112, 92)
+
+[node name="Warehouse" type="Area2D"]
+script = ExtResource("1_5y1pm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -64)
+sprite_frames = SubResource("SpriteFrames_1mdxn")
+animation = &"Building"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -46)
+shape = SubResource("RectangleShape2D_2b33i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
