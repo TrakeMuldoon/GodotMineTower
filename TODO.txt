@@ -1,10 +1,10 @@
 R 
 - Return home, without inventory.
 
---DONE ^
-
 Character Inventory
 - Ability to mine and carry ores
+
+--DONE ^
 
 Fuel
 - Fuel which runs out as you drive or fly
