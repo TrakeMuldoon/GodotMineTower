@@ -1,6 +1,5 @@
 class_name Inventory extends Node
 
-#@export var max : int
 var max
 var held_count = 0
 var ores_held = {}

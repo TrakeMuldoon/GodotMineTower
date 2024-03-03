@@ -15,6 +15,9 @@ Fuel Station
 Store / Mechanic
 - Sell inventory for things
 
+Helper Hover Notifications for Buildings
+ - Each Building should have a helper notification
+
 Mine-income 
 - Mines generate consistent income with some animation
 

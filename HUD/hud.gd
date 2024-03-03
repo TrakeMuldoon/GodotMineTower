@@ -7,7 +7,6 @@ func _ready():
 	Globals.GLOBAL_INVENTORY.inventory_modified.connect(_on_inventory_modified)
 	$CameraLocation.text = str(Globals.RANDOM_SEED)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var counter = 0
 func _process(delta):
@@ -25,12 +24,8 @@ func _on_backup_character_character_moved(pos):
 	
 	var modPosition = Vector2((pos.x - 32)/4, (pos.y + 32) / 4)
 	$PlayerLocation.text = "Player Location:\n" + str(pos) + "\n" + str(modPosition) + "\n" + str(l2m)  
-	pass # Replace with function body.
 
 
 func _on_inventory_modified():
 	$TankInventory.text = Globals.TANK_INVENTORY.HUD_printout()
 	$WorldInventory.text = Globals.GLOBAL_INVENTORY.HUD_printout()
-	
-	
-	pass # Replace with function body.

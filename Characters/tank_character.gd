@@ -14,16 +14,10 @@ signal inventory_modified
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var tilemap
 
-#var tank_inventory
-#var surface_inventory
 var ACTION_TIMER = Globals.ACTION_TIMER
 
 func _ready():
 	tilemap = get_tree().get_current_scene().get_node("WorldLevel").get_node("GroundMap")
-	#tank_inventory = Inventory.new(100)
-	#surface_inventory = Inventory.new(1000000)
-	#tank_inventory.inventory_modified.connect(InventoryModified)
-	#surface_inventory.inventory_modified.connect(InventoryModified)
 
 func _physics_process(delta):
 	if Input.is_action_pressed("Return"):
@@ -93,7 +87,6 @@ func Build_Mine(my_cell):
 	build_mine.emit(my_cell)
 
 func Get_My_Cell():
-	#var pos = Vector2(position.x, position.y)
 	var pos = $MarkPos.global_position
 	var l2m = tilemap.local_to_map(pos)
 	if l2m.y < 0:
