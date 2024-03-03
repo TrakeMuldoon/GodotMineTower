@@ -12,3 +12,5 @@ scale = Vector2(4, 4)
 tile_set = ExtResource("2_ifyyd")
 format = 2
 script = ExtResource("3_xeljv")
+
+[connection signal="found_ore" from="GroundMap" to="." method="_on_ground_map_found_ore"]

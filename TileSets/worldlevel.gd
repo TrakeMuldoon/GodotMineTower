@@ -1,5 +1,6 @@
 extends Node2D
 
+signal found_ore
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,3 +29,7 @@ func _on_tank_character_mark_my_cell(cell):
 
 func _on_tank_character_build_mine(cell):
 	$GroundMap.BuildMine(cell)
+
+
+func _on_ground_map_found_ore(ore_num):
+	found_ore.emit(Globals.UNDERGROUND_RESOURCES.keys()[ore_num])

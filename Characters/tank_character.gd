@@ -8,33 +8,31 @@ signal drilled
 signal build_wall
 signal mark_my_cell
 signal build_mine
+signal inventory_modified
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var tilemap 
+var tilemap
+
+var ACTION_TIMER = Globals.ACTION_TIMER
 
 func _ready():
 	tilemap = get_tree().get_current_scene().get_node("WorldLevel").get_node("GroundMap")
 
-#var drill_down_counter = 0
-#var drill_side_counter = 0
-var action_timer = ActionTimer.new()
-
-func ResetLocation():
-	position = Vector2.ZERO
-
 func _physics_process(delta):
 	if Input.is_action_pressed("Return"):
-		action_timer.ExecOnElapsed("Reset", 25, ResetLocation)
+		ACTION_TIMER.ExecOnElapsed("Reset", ResetLocation)
 	else:
-		action_timer.Reset("Reset")
+		ACTION_TIMER.Reset("Reset")
 	
 	if Input.is_action_just_pressed("Mark"):
 		var cell = Get_My_Cell()
 		mark_my_cell.emit(cell)
 	
 	if Input.is_action_pressed("Mine") and is_on_floor():
-		Build_Mine_Maybe()
+		ACTION_TIMER.ExecOnElapsed("BuildMine", Build_Mine_Maybe)
+	else:
+		ACTION_TIMER.Reset("BuildMine")
 	
 	if Input.is_action_just_pressed("Wall") and is_on_floor():
 		Build_Wall_Maybe()
@@ -50,23 +48,22 @@ func _physics_process(delta):
 			velocity.y = Jump_Velocity
 
 	if Input.is_action_pressed("go_down") and is_on_floor():
-		action_timer.ExecOnElapsed("DrillDown", 25, Drill_Down)
+		ACTION_TIMER.ExecOnElapsed("DrillDown", Drill_Down)
 	else:
-		action_timer.Reset("DrillDown")
+		ACTION_TIMER.Reset("DrillDown")
 	
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("go_left", "go_right")
 	
 	if direction:
 		if is_on_wall() and is_on_floor():
-			if action_timer.CounterElapsed("DrillSide", 25):
+			if ACTION_TIMER.CounterElapsed("DrillSide"):
 				Drill_Side(direction)
-				action_timer.Reset("DrillSide")
+				ACTION_TIMER.Reset("DrillSide")
 			else:
-				action_timer.Increment("DrillSide")
+				ACTION_TIMER.Increment("DrillSide")
 		else:
-			action_timer.Reset("DrillSide")
+			ACTION_TIMER.Reset("DrillSide")
 		velocity.x = direction * Speed
 
 		if velocity.x < 0:
@@ -74,7 +71,7 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite2D.flip_h = false
 	else:
-		action_timer.Reset("DrillSide")
+		ACTION_TIMER.Reset("DrillSide")
 		velocity.x = move_toward(velocity.x, 0, Speed)
 
 	move_and_slide()
@@ -90,7 +87,6 @@ func Build_Mine(my_cell):
 	build_mine.emit(my_cell)
 
 func Get_My_Cell():
-	#var pos = Vector2(position.x, position.y)
 	var pos = $MarkPos.global_position
 	var l2m = tilemap.local_to_map(pos)
 	if l2m.y < 0:
@@ -124,3 +120,15 @@ func Drill_Side(direction):
 	var drill_loc = Vector2(my_loc.x + (direction), my_loc.y)
 	drilled.emit(drill_loc)
 	
+
+func _on_world_level_found_ore(ore_name):
+	Globals.TANK_INVENTORY.add_to_inventory(ore_name, Globals.ORE_PER_NODE_DRILLED)
+	
+
+func ResetLocation():
+	Globals.TANK_INVENTORY.clear_inventory()
+	position = Vector2.ZERO
+	var mt = MovingText.new()
+	mt.text = "Inventory Wiped"
+	add_child(mt)
+	mt.go_to_it(1, 50)
