@@ -9,8 +9,11 @@ Character Inventory
 Fuel
 - Fuel which runs out as you drive or fly
 
-Fuel Station / Store / Mechanic
-- Sell inventory for things, Refuel
+Fuel Station
+-  Refuel
+
+Store / Mechanic
+- Sell inventory for things
 
 Mine-income 
 - Mines generate consistent income with some animation
