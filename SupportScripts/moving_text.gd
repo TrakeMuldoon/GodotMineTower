@@ -2,7 +2,7 @@ class_name MovingText extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	hide()
 
 var started = false
 var elapsed_time = 0
@@ -16,8 +16,8 @@ func _process(delta):
 		if elapsed_time > target_time:
 			queue_free()
 
-func go_to_it(write_text, time, x_delta):
-	text = write_text
+func go_to_it(time, x_delta):
+	show()
 	target_time = time * 1
 	distance = x_delta
 	started = true

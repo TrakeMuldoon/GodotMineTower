@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rdp31xtjnf5i"]
+
+[ext_resource type="Script" path="res://SupportScripts/moving_text.gd" id="1_7i84j"]
+
+[node name="MovingText" type="Label"]
+script = ExtResource("1_7i84j")

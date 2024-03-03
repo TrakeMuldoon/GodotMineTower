@@ -133,8 +133,10 @@ func _on_world_level_found_ore(ore_name):
 	
 
 func ResetLocation():
-	Globals.TANK_INVENTORY.add_to_inventory("blah", 5)
+	#Globals.TANK_INVENTORY.add_to_inventory("blah", 5)
+	Globals.TANK_INVENTORY.clear_inventory()
 	position = Vector2.ZERO
 	var mt = MovingText.new()
+	mt.text = "Inventory Wiped"
 	add_child(mt)
-	mt.go_to_it("Inventory Wiped", 1, 50)
+	mt.go_to_it(1, 50)

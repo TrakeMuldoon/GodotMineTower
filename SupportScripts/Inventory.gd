@@ -23,6 +23,7 @@ func add_to_inventory(label, count):
 func remove_from_inventory(label):
 	var value = ores_held[label]
 	ores_held.erase(label)
+	inventory_modified.emit()
 	return value
 	
 func get_ores():
@@ -30,6 +31,10 @@ func get_ores():
 	for ore in ores_held:
 		ore_list.append(ore)
 	return ore_list
+
+func clear_inventory():
+	ores_held = {}
+	inventory_modified.emit()
 
 func HUD_printout():
 	var output = "floop\n"
