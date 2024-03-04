@@ -29,3 +29,7 @@ func _on_backup_character_character_moved(pos):
 func _on_inventory_modified():
 	$TankInventory.text = Globals.TANK_INVENTORY.HUD_printout()
 	$WorldInventory.text = Globals.GLOBAL_INVENTORY.HUD_printout()
+
+
+func _on_tank_character_fuel_modified(fuel_percentage):
+	$FuelTank.value = fuel_percentage * 100
