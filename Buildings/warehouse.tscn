@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://Buildings/warehouse.gd" id="1_5y1pm"]
 [ext_resource type="Texture2D" uid="uid://bo3dygk67g2sd" path="res://assets/Buildlings.png" id="2_kl8fb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y252h"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht40n"]
 atlas = ExtResource("2_kl8fb")
-region = Rect2(0, 0, 128, 128)
+region = Rect2(128, 128, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1mdxn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y252h")
+"texture": SubResource("AtlasTexture_ht40n")
 }],
 "loop": true,
 "name": &"Building",

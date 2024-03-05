@@ -4,10 +4,10 @@ R
 Character Inventory
 - Ability to mine and carry ores
 
---DONE ^
-
 Fuel
 - Fuel which runs out as you drive or fly
+
+--DONE ^
 
 Fuel Station
 -  Refuel
@@ -17,6 +17,16 @@ Store / Mechanic
 
 Helper Hover Notifications for Buildings
  - Each Building should have a helper notification
+
+Tutorial Signs
+- Move all the buildings
+- Ability to change "Respawn" spot (surface only)
+	"AD or < > to move Left and Right"
+	"A,S,D or < V > to Drill"
+	"W to jet up (uses fuel)"
+	"hold R to return to surface (LOSE INVENTORY)"
+	"hold Z to build a wall (costs resource)"
+	"hold M to build a mine (costs 10x resource)"
 
 Mine-income 
 - Mines generate consistent income with some animation

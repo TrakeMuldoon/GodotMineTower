@@ -80,7 +80,10 @@ func _physics_process(delta):
 	character_moved.emit(position)
 
 var fuel = FuelTankSize
+var fuel_decrease = 5
 func Jump():
+	if fuel < fuel_decrease:
+		return
 	if is_on_floor(): # and is_on_floor():
 		velocity.y = Floor_Boost_Velocity
 	else:
@@ -88,7 +91,7 @@ func Jump():
 	if velocity.y < Max_Boost_Velocity:
 		velocity.y = Max_Boost_Velocity
 	else:
-		fuel -= 5
+		fuel -= fuel_decrease
 		var fuel_percent = float(fuel) / FuelTankSize
 		fuel_modified.emit(fuel_percent)
 		

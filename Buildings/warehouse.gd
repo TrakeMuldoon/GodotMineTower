@@ -45,4 +45,3 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	check_for_input = false
 	Globals.ACTION_TIMER.Reset("BuildingInteract")
-	
