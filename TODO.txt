@@ -9,6 +9,9 @@ Fuel
 
 --DONE ^
 
+Abstract Notifier
+- Too much work is being done in every class
+
 Fuel Station
 -  Refuel
 

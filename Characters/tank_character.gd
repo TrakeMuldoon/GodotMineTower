@@ -1,10 +1,19 @@
 extends CharacterBody2D
 
+#Drive Speed
 @export var Speed : float = 300.0
+
+#Jumping
 @export var Boost_Velocity : float = -300.0
 @export var Floor_Boost_Velocity : float = -500.0
 @export var Max_Boost_Velocity : float = -800.0
-@export var FuelTankSize : int = 100
+
+#Fuel
+@export var StartFuelTankSize : int = 100
+var FuelTankSize = StartFuelTankSize
+var fuel = FuelTankSize
+var fuel_decrease = 5
+
 signal character_moved
 signal drilled
 signal build_wall
@@ -79,8 +88,7 @@ func _physics_process(delta):
 
 	character_moved.emit(position)
 
-var fuel = FuelTankSize
-var fuel_decrease = 5
+
 func Jump():
 	if fuel < fuel_decrease:
 		return
@@ -148,5 +156,16 @@ func ResetLocation():
 	position = Vector2.ZERO
 	var mt = MovingText.new()
 	mt.text = "Inventory Wiped"
+	add_child(mt)
+	mt.go_to_it(1, 50)
+
+
+func _on_gas_station_fill_gastank():
+	fuel = FuelTankSize
+	var fuel_percent = float(fuel) / FuelTankSize
+	fuel_modified.emit(fuel_percent)
+	
+	var mt = MovingText.new()
+	mt.text = "Fueeled up!"
 	add_child(mt)
 	mt.go_to_it(1, 50)
