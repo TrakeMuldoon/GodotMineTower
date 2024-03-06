@@ -1,14 +1,27 @@
 extends CharacterBody2D
 
+#Drive Speed
 @export var Speed : float = 300.0
-@export var Jump_Velocity : float = -300.0
-@export var Floor_Jump_Velocity : float = -500.0
+
+#Jumping
+@export var Boost_Velocity : float = -300.0
+@export var Floor_Boost_Velocity : float = -500.0
+@export var Max_Boost_Velocity : float = -800.0
+
+#Fuel
+@export var StartFuelTankSize : int = 100
+var FuelTankSize = StartFuelTankSize
+var fuel = FuelTankSize
+var fuel_decrease = 5
+
 signal character_moved
 signal drilled
 signal build_wall
 signal mark_my_cell
 signal build_mine
 signal inventory_modified
+signal fuel_modified
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -42,10 +55,7 @@ func _physics_process(delta):
 
 	# Handle jump.
 	if Input.is_action_just_pressed("go_up"):
-		if is_on_floor(): # and is_on_floor():
-			velocity.y = Floor_Jump_Velocity
-		else:
-			velocity.y = Jump_Velocity
+		Jump()
 
 	if Input.is_action_pressed("go_down") and is_on_floor():
 		ACTION_TIMER.ExecOnElapsed("DrillDown", Drill_Down)
@@ -78,6 +88,22 @@ func _physics_process(delta):
 
 	character_moved.emit(position)
 
+
+func Jump():
+	if fuel < fuel_decrease:
+		return
+	if is_on_floor(): # and is_on_floor():
+		velocity.y = Floor_Boost_Velocity
+	else:
+		velocity.y = Boost_Velocity
+	if velocity.y < Max_Boost_Velocity:
+		velocity.y = Max_Boost_Velocity
+	else:
+		fuel -= fuel_decrease
+		var fuel_percent = float(fuel) / FuelTankSize
+		fuel_modified.emit(fuel_percent)
+		
+
 func Build_Mine_Maybe():
 	var my_cell = Get_My_Cell()
 	if(tilemap.Can_Build_At(my_cell)):
@@ -104,18 +130,18 @@ func Build_Wall_Maybe():
 	var my_loc = Get_My_Cell()
 	
 	position.y -= 64 # move me out of the way
-	velocity.y = Jump_Velocity * 0.1
+	velocity.y = Boost_Velocity * 0.1
 	
 	build_wall.emit(my_loc)
 
 func Drill_Down():
-	velocity.y = Jump_Velocity * 0.1
+	velocity.y = Boost_Velocity * 0.1
 	var my_loc = Get_My_Cell()
 	var drill_loc = Vector2(my_loc.x, my_loc.y + 1)
 	drilled.emit(drill_loc)
 
 func Drill_Side(direction):
-	velocity.y = Jump_Velocity * 0.1
+	velocity.y = Boost_Velocity * 0.1
 	var my_loc = Get_My_Cell()
 	var drill_loc = Vector2(my_loc.x + (direction), my_loc.y)
 	drilled.emit(drill_loc)
@@ -128,7 +154,10 @@ func _on_world_level_found_ore(ore_name):
 func ResetLocation():
 	Globals.TANK_INVENTORY.clear_inventory()
 	position = Vector2.ZERO
-	var mt = MovingText.new()
-	mt.text = "Inventory Wiped"
-	add_child(mt)
-	mt.go_to_it(1, 50)
+	$MovingNotifier.EnqueueMessage("Inventory Wiped")
+
+func _on_gas_station_fill_gastank():
+	fuel = FuelTankSize
+	var fuel_percent = float(fuel) / FuelTankSize
+	fuel_modified.emit(fuel_percent)
+	$MovingNotifier.EnqueueMessage("Fueeled up!")

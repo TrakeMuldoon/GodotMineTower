@@ -7,7 +7,15 @@ signal inventory_modified
 
 func _init(_max):
 	max = _max
-	
+	debug_stuff()
+
+func debug_stuff():
+	add_to_inventory("COAL", 5)
+	add_to_inventory("IRON", 5)
+	add_to_inventory("COPPER", 5)
+	add_to_inventory("MAGNESIUM", 5)
+	add_to_inventory("SILVER", 5)
+
 func add_to_inventory(label, count):
 	if count + held_count > max:
 		return false

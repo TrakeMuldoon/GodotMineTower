@@ -4,13 +4,19 @@ R
 Character Inventory
 - Ability to mine and carry ores
 
---DONE ^
-
 Fuel
 - Fuel which runs out as you drive or fly
 
 Fuel Station
 -  Refuel
+
+Abstract Notifier
+- Too much work is being done in every class
+
+--DONE ^
+
+Drop Ore on Floor
+- When you mine something and the tank is full.
 
 Store / Mechanic
 - Sell inventory for things
@@ -18,13 +24,28 @@ Store / Mechanic
 Helper Hover Notifications for Buildings
  - Each Building should have a helper notification
 
+Clean up HUD
+
+Tutorial Signs
+- Move all the buildings
+- Ability to change "Respawn" spot (surface only)
+	"AD or < > to move Left and Right"
+	"A,S,D or < V > to Drill"
+	"W to jet up (uses fuel)"
+	"hold R to return to surface (LOSE INVENTORY)"
+	"hold Z to build a wall (costs resource)"
+	"hold M to build a mine (costs 10x resource)"
+
 Mine-income 
 - Mines generate consistent income with some animation
 
 Mine Cost
 - Each Mine costs something to build
 
-Add To Inventory
+UnDrillable Rock
+- Layer them on the surface under the core buildings
+
+?? Add To Inventory
 - Must bring materials
 
 Char Stats -
@@ -63,9 +84,6 @@ Caves/Mansions/Clouds
 
 Dirt Layers
 	Each with their own drill speed, ore propportions
-
-Rocks!
-	- Undrillable
 
 Sky
 - Create the cloud world!
