@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhd3na60mj5w0"]
+[gd_scene load_steps=16 format=3 uid="uid://bhd3na60mj5w0"]
 
 [ext_resource type="Texture2D" uid="uid://d4ig3rk6l42ff" path="res://assets/MineBird.png" id="1_nnluh"]
 [ext_resource type="Script" path="res://Characters/tank_character.gd" id="1_p4ov2"]
 [ext_resource type="Texture2D" uid="uid://475h7n4sr8n0" path="res://assets/Rapunzel.png" id="3_jhqsu"]
+[ext_resource type="PackedScene" uid="uid://rvxuc2x54cmw" path="res://SupportScripts/moving_notifier.tscn" id="4_1iggp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6r37p"]
 atlas = ExtResource("1_nnluh")
@@ -101,3 +102,6 @@ shape = SubResource("CapsuleShape2D_qdwok")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Headroom"]
 position = Vector2(0, -36)
 shape = SubResource("CircleShape2D_vov6b")
+
+[node name="MovingNotifier" parent="." instance=ExtResource("4_1iggp")]
+position = Vector2(12, -26)

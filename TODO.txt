@@ -7,19 +7,25 @@ Character Inventory
 Fuel
 - Fuel which runs out as you drive or fly
 
+
+Fuel Station
+-  Refuel
+
 --DONE ^
 
 Abstract Notifier
 - Too much work is being done in every class
 
-Fuel Station
--  Refuel
+Drop Ore on Floor
+- When you mine something and the tank is full.
 
 Store / Mechanic
 - Sell inventory for things
 
 Helper Hover Notifications for Buildings
  - Each Building should have a helper notification
+
+Clean up HUD
 
 Tutorial Signs
 - Move all the buildings
@@ -37,7 +43,10 @@ Mine-income
 Mine Cost
 - Each Mine costs something to build
 
-Add To Inventory
+UnDrillable Rock
+- Layer them on the surface under the core buildings
+
+?? Add To Inventory
 - Must bring materials
 
 Char Stats -
@@ -76,9 +85,6 @@ Caves/Mansions/Clouds
 
 Dirt Layers
 	Each with their own drill speed, ore propportions
-
-Rocks!
-	- Undrillable
 
 Sky
 - Create the cloud world!

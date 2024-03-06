@@ -16,27 +16,12 @@ func _process(delta):
 		else:
 			Globals.ACTION_TIMER.Reset("BuildingInteract")
 
-var queue = []
 func MoveInventory():
-	queue = []
 	for ore in Globals.TANK_INVENTORY.get_ores():
 		var local_inv = Globals.TANK_INVENTORY.remove_from_inventory(ore)
 		Globals.GLOBAL_INVENTORY.add_to_inventory(ore, local_inv)
-		var mt = MovingText.new()
-		mt.position.y -= 40
-		add_child(mt)
 		var text = "Moved {num} {ore}".format({"num": local_inv, "ore": ore})
-		mt.text = text
-		queue.append(mt)
-	write_messages()
-
-func write_messages():
-	if queue.size() == 0:
-		return
-	var next = queue.pop_front()
-	next.go_to_it(0.4, 60)
-	await get_tree().create_timer(0.15).timeout
-	write_messages()
+		$MovingNotifier.EnqueueMessage(text)
 
 func _on_body_entered(body):
 	check_for_input = true

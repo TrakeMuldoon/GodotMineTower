@@ -5,7 +5,7 @@ extends CanvasLayer
 func _ready():
 	Globals.TANK_INVENTORY.inventory_modified.connect(_on_inventory_modified)
 	Globals.GLOBAL_INVENTORY.inventory_modified.connect(_on_inventory_modified)
-	$CameraLocation.text = str(Globals.RANDOM_SEED)
+	$WorldSeed.text = "World Seed:" + str(Globals.RANDOM_SEED)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var counter = 0

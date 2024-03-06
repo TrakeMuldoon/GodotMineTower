@@ -154,18 +154,10 @@ func _on_world_level_found_ore(ore_name):
 func ResetLocation():
 	Globals.TANK_INVENTORY.clear_inventory()
 	position = Vector2.ZERO
-	var mt = MovingText.new()
-	mt.text = "Inventory Wiped"
-	add_child(mt)
-	mt.go_to_it(1, 50)
-
+	$MovingNotifier.EnqueueMessage("Inventory Wiped")
 
 func _on_gas_station_fill_gastank():
 	fuel = FuelTankSize
 	var fuel_percent = float(fuel) / FuelTankSize
 	fuel_modified.emit(fuel_percent)
-	
-	var mt = MovingText.new()
-	mt.text = "Fueeled up!"
-	add_child(mt)
-	mt.go_to_it(1, 50)
+	$MovingNotifier.EnqueueMessage("Fueeled up!")

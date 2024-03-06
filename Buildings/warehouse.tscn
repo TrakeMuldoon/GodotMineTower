@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1n8ykio0swl0"]
+[gd_scene load_steps=7 format=3 uid="uid://c1n8ykio0swl0"]
 
 [ext_resource type="Script" path="res://Buildings/warehouse.gd" id="1_5y1pm"]
 [ext_resource type="Texture2D" uid="uid://bo3dygk67g2sd" path="res://assets/Buildlings.png" id="2_kl8fb"]
+[ext_resource type="Script" path="res://SupportScripts/moving_notifier.gd" id="3_2s8h0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ht40n"]
 atlas = ExtResource("2_kl8fb")
@@ -19,7 +20,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2b33i"]
-size = Vector2(112, 92)
+size = Vector2(128, 92)
 
 [node name="Warehouse" type="Area2D"]
 script = ExtResource("1_5y1pm")
@@ -30,8 +31,12 @@ sprite_frames = SubResource("SpriteFrames_1mdxn")
 animation = &"Building"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -46)
+position = Vector2(4, -46)
 shape = SubResource("RectangleShape2D_2b33i")
+
+[node name="MovingNotifier" type="Node2D" parent="."]
+position = Vector2(34, -32)
+script = ExtResource("3_2s8h0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
