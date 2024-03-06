@@ -7,14 +7,13 @@ Character Inventory
 Fuel
 - Fuel which runs out as you drive or fly
 
-
 Fuel Station
 -  Refuel
 
---DONE ^
-
 Abstract Notifier
 - Too much work is being done in every class
+
+--DONE ^
 
 Drop Ore on Floor
 - When you mine something and the tank is full.
