@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5lmaos33t6sy"
-path="res://.godot/imported/Minecart1.png-b07428856ff6d364d9b4490141bf6a9d.ctex"
+uid="uid://c32qe801ka5ug"
+path="res://.godot/imported/OrePiles.png-85aef6ca86a0fa9b70b4a67d77c0c133.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Minecart1.png"
-dest_files=["res://.godot/imported/Minecart1.png-b07428856ff6d364d9b4490141bf6a9d.ctex"]
+source_file="res://assets/OrePiles.png"
+dest_files=["res://.godot/imported/OrePiles.png-85aef6ca86a0fa9b70b4a67d77c0c133.ctex"]
 
 [params]
 

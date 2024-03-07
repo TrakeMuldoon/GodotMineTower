@@ -18,9 +18,6 @@ Abstract Notifier
 Drop Ore on Floor
 - When you mine something and the tank is full.
 
-Store / Mechanic
-- Sell inventory for things
-
 Helper Hover Notifications for Buildings
  - Each Building should have a helper notification
 
@@ -44,6 +41,9 @@ Mine Cost
 
 UnDrillable Rock
 - Layer them on the surface under the core buildings
+
+Store / Mechanic
+- Sell inventory for things
 
 ?? Add To Inventory
 - Must bring materials
