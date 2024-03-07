@@ -40,8 +40,10 @@ func get_ores():
 	return ore_list
 
 func clear_inventory():
+	var previous_inventory = ores_held
 	ores_held = {}
 	inventory_modified.emit()
+	return previous_inventory
 
 func HUD_printout():
 	var output = "floop\n"

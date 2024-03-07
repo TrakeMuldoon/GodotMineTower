@@ -14,6 +14,8 @@ var FuelTankSize = StartFuelTankSize
 var fuel = FuelTankSize
 var fuel_decrease = 5
 
+@export var ore_pile: PackedScene
+
 signal character_moved
 signal drilled
 signal build_wall
@@ -152,9 +154,20 @@ func _on_world_level_found_ore(ore_name):
 	
 
 func ResetLocation():
-	Globals.TANK_INVENTORY.clear_inventory()
+	var inventory = Globals.TANK_INVENTORY.clear_inventory()
+	var placementx = position.x
+	for ore in inventory:
+		var amount = inventory[ore]
+		while amount > 0:
+			var pile = 50 if amount > 50 else amount
+			amount -= 50
+			var orep = ore_pile.instantiate()
+			orep.SetVals(ore, amount)
+			placementx = placementx + 8
+			orep.position = Vector2(placementx, position.y + 28)
+			get_parent().add_child(orep)
 	position = Vector2.ZERO
-	$MovingNotifier.EnqueueMessage("Inventory Wiped")
+	$MovingNotifier.EnqueueMessage("Inventory Dropped")
 
 func _on_gas_station_fill_gastank():
 	fuel = FuelTankSize

@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdmjeh55j5hmx"]
+[gd_scene load_steps=9 format=3 uid="uid://cdmjeh55j5hmx"]
 
 [ext_resource type="Texture2D" uid="uid://c32qe801ka5ug" path="res://assets/OrePiles.png" id="1_0m2uo"]
+[ext_resource type="Script" path="res://SupportScripts/ore_pile.gd" id="1_x7vmn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r6omw"]
 radius = 11.0
@@ -58,13 +59,16 @@ animations = [{
 }]
 
 [node name="OrePile" type="Area2D"]
+script = ExtResource("1_x7vmn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_r6omw")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PileShape" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -32)
 sprite_frames = SubResource("SpriteFrames_8pkas")
 animation = &"MAGNESIUM"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
