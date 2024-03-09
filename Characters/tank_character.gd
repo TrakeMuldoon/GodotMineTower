@@ -171,7 +171,7 @@ func DropInventoryIntoPiles(drop_pos):
 		while amount > 0:
 			var pile = 50 if amount > 50 else amount
 			amount -= 50
-			curr_place = Vector2(curr_place.x + 4, curr_place.y - 6)
+			curr_place = Vector2(curr_place.x + 4, curr_place.y)
 			create_ore_pile(ore, pile, curr_place)
 
 	$MovingNotifier.EnqueueMessage("Inventory Dropped")
@@ -186,13 +186,17 @@ func create_ore_pile(ore_name, amount, location):
 func ore_pile_entered(drop_item, ore_type, number):
 	var inv = Globals.TANK_INVENTORY
 	var cant_fit = inv.add_to_inventory(ore_type, number)
+	
+	var msg = "Grabbed " + str(number - cant_fit) + " " + str(ore_type) + "s"
+	$MovingNotifier.EnqueueMessage(msg)
+	
 	if cant_fit > 0:
+		$MovingNotifier.EnqueueMessage("Inventory FULL")
 		drop_item.amount = cant_fit
 		drop_item.set_timeout()
 	else:
 		drop_item.queue_free()
-	var msg = "Grabbed " + str(number - cant_fit) + " " + str(ore_type) + "s"
-	$MovingNotifier.EnqueueMessage(msg)
+
 
 func _on_gas_station_fill_gastank():
 	fuel = FuelTankSize

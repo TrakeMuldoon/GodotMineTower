@@ -10,15 +10,14 @@ func _init(_max):
 	debug_stuff()
 
 func debug_stuff():
-	add_to_inventory("COAL", 96)
-	#add_to_inventory("IRON", 5)
-	#add_to_inventory("COPPER", 5)
-	#add_to_inventory("MAGNESIUM", 5)
+	add_to_inventory("COAL", 5)
+	add_to_inventory("IRON", 5)
+	add_to_inventory("COPPER", 5)
+	add_to_inventory("MAGNESIUM", 5)
 	##add_to_inventory("SILVER", 5)
 
 func add_to_inventory(label, count):
 	var can_fit = count if count + held_count <= max else max - held_count
-		
 	held_count += can_fit
 	if not label in ores_held:
 		ores_held[label] = 0
