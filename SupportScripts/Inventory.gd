@@ -14,22 +14,21 @@ func debug_stuff():
 	add_to_inventory("IRON", 5)
 	add_to_inventory("COPPER", 5)
 	add_to_inventory("MAGNESIUM", 5)
-	add_to_inventory("SILVER", 5)
+	##add_to_inventory("SILVER", 5)
 
 func add_to_inventory(label, count):
-	if count + held_count > max:
-		return false
-		
-	held_count += count
+	var can_fit = count if count + held_count <= max else max - held_count
+	held_count += can_fit
 	if not label in ores_held:
 		ores_held[label] = 0
-	ores_held[label] += count
+	ores_held[label] += can_fit
 	inventory_modified.emit()
-	return true
+	return count - can_fit
 
 func remove_from_inventory(label):
 	var value = ores_held[label]
 	ores_held.erase(label)
+	held_count -= value
 	inventory_modified.emit()
 	return value
 	
@@ -40,8 +39,11 @@ func get_ores():
 	return ore_list
 
 func clear_inventory():
+	var previous_inventory = ores_held
 	ores_held = {}
+	held_count = 0
 	inventory_modified.emit()
+	return previous_inventory
 
 func HUD_printout():
 	var output = "floop\n"

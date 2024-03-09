@@ -19,7 +19,9 @@ func _process(delta):
 func MoveInventory():
 	for ore in Globals.TANK_INVENTORY.get_ores():
 		var local_inv = Globals.TANK_INVENTORY.remove_from_inventory(ore)
-		Globals.GLOBAL_INVENTORY.add_to_inventory(ore, local_inv)
+		var leftover = Globals.GLOBAL_INVENTORY.add_to_inventory(ore, local_inv)
+		if leftover > 0:
+			assert("Earthshattering bad thing")
 		var text = "Moved {num} {ore}".format({"num": local_inv, "ore": ore})
 		$MovingNotifier.EnqueueMessage(text)
 

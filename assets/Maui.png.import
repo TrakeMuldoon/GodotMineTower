@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5lmaos33t6sy"
-path="res://.godot/imported/Minecart1.png-b07428856ff6d364d9b4490141bf6a9d.ctex"
+uid="uid://dga0qiyomasi7"
+path="res://.godot/imported/Maui.png-4ff213b858e464ba695df3b84ef8b5b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Minecart1.png"
-dest_files=["res://.godot/imported/Minecart1.png-b07428856ff6d364d9b4490141bf6a9d.ctex"]
+source_file="res://assets/Maui.png"
+dest_files=["res://.godot/imported/Maui.png-4ff213b858e464ba695df3b84ef8b5b4.ctex"]
 
 [params]
 

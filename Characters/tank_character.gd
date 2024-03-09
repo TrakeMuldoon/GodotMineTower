@@ -14,6 +14,11 @@ var FuelTankSize = StartFuelTankSize
 var fuel = FuelTankSize
 var fuel_decrease = 5
 
+var reset_position = Vector2.ZERO
+
+var dropped_item: PackedScene = preload("res://SupportScripts/dropped_item.tscn")
+var ore_drop_offset = Vector2(0, 16)
+
 signal character_moved
 signal drilled
 signal build_wall
@@ -21,7 +26,6 @@ signal mark_my_cell
 signal build_mine
 signal inventory_modified
 signal fuel_modified
-
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -34,7 +38,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_pressed("Return"):
-		ACTION_TIMER.ExecOnElapsed("Reset", ResetLocation)
+		ACTION_TIMER.ExecOnElapsed("Reset", ResetLocationAndDropInventory)
 	else:
 		ACTION_TIMER.Reset("Reset")
 	
@@ -47,9 +51,12 @@ func _physics_process(delta):
 	else:
 		ACTION_TIMER.Reset("BuildMine")
 	
-	if Input.is_action_just_pressed("Wall") and is_on_floor():
-		Build_Wall_Maybe()
-	# Add the gravity.
+	if Input.is_action_pressed("Wall") and is_on_floor():
+		ACTION_TIMER.ExecOnElapsed("Wall", Build_Wall_Maybe)
+	else:
+		ACTION_TIMER.Reset("Wall")
+		
+	# Handle Gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
@@ -65,6 +72,8 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("go_left", "go_right")
 	
+	#TODO: Split moving and drilling into separate code chunks.
+	# move actionss up top
 	if direction:
 		if is_on_wall() and is_on_floor():
 			if ACTION_TIMER.CounterElapsed("DrillSide"):
@@ -124,15 +133,12 @@ func Get_My_Cell():
 	return l2m
 
 func Build_Wall_Maybe():
-	if $Headroom.has_overlapping_bodies():
-		return
-
-	var my_loc = Get_My_Cell()
-	
+	if $Headroom.has_overlapping_bodies(): 
+		return # Can't move up, so can't build
+		
+	var my_loc = Get_My_Cell() # Find position wall should be
 	position.y -= 64 # move me out of the way
-	velocity.y = Boost_Velocity * 0.1
-	
-	build_wall.emit(my_loc)
+	build_wall.emit(my_loc) # Tell wall to be built
 
 func Drill_Down():
 	velocity.y = Boost_Velocity * 0.1
@@ -145,16 +151,52 @@ func Drill_Side(direction):
 	var my_loc = Get_My_Cell()
 	var drill_loc = Vector2(my_loc.x + (direction), my_loc.y)
 	drilled.emit(drill_loc)
-	
 
 func _on_world_level_found_ore(ore_name):
-	Globals.TANK_INVENTORY.add_to_inventory(ore_name, Globals.ORE_PER_NODE_DRILLED)
-	
+	var inv = Globals.TANK_INVENTORY
+	var cant_fit = inv.add_to_inventory(ore_name, Globals.ORE_PER_NODE_DRILLED)
+	if cant_fit > 0:
+		create_ore_pile(ore_name, cant_fit, position + ore_drop_offset)
 
-func ResetLocation():
-	Globals.TANK_INVENTORY.clear_inventory()
-	position = Vector2.ZERO
-	$MovingNotifier.EnqueueMessage("Inventory Wiped")
+func ResetLocationAndDropInventory():
+	var original_position = position
+	position = reset_position
+	DropInventoryIntoPiles(original_position + ore_drop_offset)
+
+func DropInventoryIntoPiles(drop_pos):
+	var inventory = Globals.TANK_INVENTORY.clear_inventory()
+	var curr_place = drop_pos
+	for ore in inventory:
+		var amount = inventory[ore]
+		while amount > 0:
+			var pile = 50 if amount > 50 else amount
+			amount -= 50
+			curr_place = Vector2(curr_place.x + 4, curr_place.y)
+			create_ore_pile(ore, pile, curr_place)
+
+	$MovingNotifier.EnqueueMessage("Inventory Dropped")
+
+func create_ore_pile(ore_name, amount, location):
+	var item = dropped_item.instantiate()
+	item.SetVals(ore_name, amount)
+	item.position = location
+	get_parent().add_child(item)
+	item.pickup_attempt.connect(ore_pile_entered)
+	
+func ore_pile_entered(drop_item, ore_type, number):
+	var inv = Globals.TANK_INVENTORY
+	var cant_fit = inv.add_to_inventory(ore_type, number)
+	
+	var msg = "Grabbed " + str(number - cant_fit) + " " + str(ore_type) + "s"
+	$MovingNotifier.EnqueueMessage(msg)
+	
+	if cant_fit > 0:
+		$MovingNotifier.EnqueueMessage("Inventory FULL")
+		drop_item.amount = cant_fit
+		drop_item.set_timeout()
+	else:
+		drop_item.queue_free()
+
 
 func _on_gas_station_fill_gastank():
 	fuel = FuelTankSize
