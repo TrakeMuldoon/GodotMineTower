@@ -17,6 +17,7 @@ var fuel_decrease = 5
 var reset_position = Vector2.ZERO
 
 var dropped_item: PackedScene = preload("res://SupportScripts/dropped_item.tscn")
+var ore_drop_offset = Vector2(0, 16)
 
 signal character_moved
 signal drilled
@@ -152,14 +153,19 @@ func Drill_Side(direction):
 	drilled.emit(drill_loc)
 
 func _on_world_level_found_ore(ore_name):
-	Globals.TANK_INVENTORY.add_to_inventory(ore_name, Globals.ORE_PER_NODE_DRILLED)
-	
+	var inv = Globals.TANK_INVENTORY
+	var cant_fit = inv.add_to_inventory(ore_name, Globals.ORE_PER_NODE_DRILLED)
+	if cant_fit > 0:
+		create_ore_pile(ore_name, cant_fit, position + ore_drop_offset)
+
 func ResetLocationAndDropInventory():
 	var original_position = position
 	position = reset_position
-	
+	DropInventoryIntoPiles(original_position + ore_drop_offset)
+
+func DropInventoryIntoPiles(drop_pos):
 	var inventory = Globals.TANK_INVENTORY.clear_inventory()
-	var curr_place = Vector2(original_position.x, original_position.y + 28)
+	var curr_place = drop_pos
 	for ore in inventory:
 		var amount = inventory[ore]
 		while amount > 0:
@@ -177,9 +183,15 @@ func create_ore_pile(ore_name, amount, location):
 	get_parent().add_child(item)
 	item.pickup_attempt.connect(ore_pile_entered)
 	
-func ore_pile_entered(a, b):
-	var zero = 12 - 12
-	var msg = "Grabbed " + str(b) + " " + str(a) + "s"
+func ore_pile_entered(drop_item, ore_type, number):
+	var inv = Globals.TANK_INVENTORY
+	var cant_fit = inv.add_to_inventory(ore_type, number)
+	if cant_fit > 0:
+		drop_item.amount = cant_fit
+		drop_item.set_timeout()
+	else:
+		drop_item.queue_free()
+	var msg = "Grabbed " + str(number - cant_fit) + " " + str(ore_type) + "s"
 	$MovingNotifier.EnqueueMessage(msg)
 
 func _on_gas_station_fill_gastank():

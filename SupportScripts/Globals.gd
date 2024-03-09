@@ -12,7 +12,7 @@ var ACTION_TIMEOUT = 30
 var ACTION_TIMER = ActionTimer.new(ACTION_TIMEOUT)
 
 var TANK_INVENTORY = Inventory.new(100)
-var GLOBAL_INVENTORY = Inventory.new(100000)
+var GLOBAL_INVENTORY = Inventory.new(1000000)
 
 var ORE_PER_NODE_DRILLED = 5
 var ORE_COST_PER_MINE = 0
