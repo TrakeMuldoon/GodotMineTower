@@ -5,6 +5,8 @@ var From_Map_Generation = false
 var amount = 50
 var ore_type = "COAL"
 
+signal pickup_attempt
+
 func _init(type = "COAL", value = 15):
 	SetVals(type, value)
 
@@ -22,5 +24,9 @@ func _ready():
 func _process(delta):
 	pass
 
+
 func _on_area_entered(area):
-	pass # Replace with function body.
+	var areas = get_overlapping_areas()
+	var nodes = get_overlapping_bodies()
+	if nodes.size() > 0:
+		pickup_attempt.emit(ore_type, amount)

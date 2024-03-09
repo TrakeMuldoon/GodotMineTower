@@ -14,7 +14,9 @@ var FuelTankSize = StartFuelTankSize
 var fuel = FuelTankSize
 var fuel_decrease = 5
 
-@export var ore_pile: PackedScene
+var reset_position = Vector2.ZERO
+
+var dropped_item: PackedScene = preload("res://SupportScripts/dropped_item.tscn")
 
 signal character_moved
 signal drilled
@@ -23,7 +25,6 @@ signal mark_my_cell
 signal build_mine
 signal inventory_modified
 signal fuel_modified
-
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -36,7 +37,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_pressed("Return"):
-		ACTION_TIMER.ExecOnElapsed("Reset", ResetLocation)
+		ACTION_TIMER.ExecOnElapsed("Reset", ResetLocationAndDropInventory)
 	else:
 		ACTION_TIMER.Reset("Reset")
 	
@@ -49,9 +50,12 @@ func _physics_process(delta):
 	else:
 		ACTION_TIMER.Reset("BuildMine")
 	
-	if Input.is_action_just_pressed("Wall") and is_on_floor():
-		Build_Wall_Maybe()
-	# Add the gravity.
+	if Input.is_action_pressed("Wall") and is_on_floor():
+		ACTION_TIMER.ExecOnElapsed("Wall", Build_Wall_Maybe)
+	else:
+		ACTION_TIMER.Reset("Wall")
+		
+	# Handle Gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
@@ -67,6 +71,8 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("go_left", "go_right")
 	
+	#TODO: Split moving and drilling into separate code chunks.
+	# move actionss up top
 	if direction:
 		if is_on_wall() and is_on_floor():
 			if ACTION_TIMER.CounterElapsed("DrillSide"):
@@ -132,7 +138,6 @@ func Build_Wall_Maybe():
 	var my_loc = Get_My_Cell()
 	
 	position.y -= 64 # move me out of the way
-	velocity.y = Boost_Velocity * 0.1
 	
 	build_wall.emit(my_loc)
 
@@ -147,27 +152,37 @@ func Drill_Side(direction):
 	var my_loc = Get_My_Cell()
 	var drill_loc = Vector2(my_loc.x + (direction), my_loc.y)
 	drilled.emit(drill_loc)
-	
 
 func _on_world_level_found_ore(ore_name):
 	Globals.TANK_INVENTORY.add_to_inventory(ore_name, Globals.ORE_PER_NODE_DRILLED)
 	
-
-func ResetLocation():
+func ResetLocationAndDropInventory():
+	var original_position = position
+	position = reset_position
+	
 	var inventory = Globals.TANK_INVENTORY.clear_inventory()
-	var placementx = position.x
+	var curr_place = Vector2(original_position.x, original_position.y + 28)
 	for ore in inventory:
 		var amount = inventory[ore]
 		while amount > 0:
 			var pile = 50 if amount > 50 else amount
 			amount -= 50
-			var orep = ore_pile.instantiate()
-			orep.SetVals(ore, amount)
-			placementx = placementx + 8
-			orep.position = Vector2(placementx, position.y + 28)
-			get_parent().add_child(orep)
-	position = Vector2.ZERO
+			curr_place = Vector2(curr_place.x + 8, curr_place.y - 8)
+			create_ore_pile(ore, pile, curr_place)
+
 	$MovingNotifier.EnqueueMessage("Inventory Dropped")
+
+func create_ore_pile(ore_name, amount, location):
+	var item = dropped_item.instantiate()
+	item.SetVals(ore_name, amount)
+	item.position = location
+	get_parent().add_child(item)
+	item.pickup_attempt.connect(ore_pile_entered)
+	
+func ore_pile_entered(a, b):
+	var zero = 12 - 12
+	var msg = "Grabbed " + str(b) + " " + str(a) + "s"
+	$MovingNotifier.EnqueueMessage(msg)
 
 func _on_gas_station_fill_gastank():
 	fuel = FuelTankSize

@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdmjeh55j5hmx"]
+[gd_scene load_steps=10 format=3 uid="uid://8r0sfltiltyg"]
 
 [ext_resource type="Texture2D" uid="uid://c32qe801ka5ug" path="res://assets/OrePiles.png" id="1_0m2uo"]
-[ext_resource type="Script" path="res://SupportScripts/ore_pile.gd" id="1_x7vmn"]
+[ext_resource type="Script" path="res://SupportScripts/dropped_item.gd" id="1_dwcog"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r6omw"]
-radius = 13.0
-height = 58.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8qijk"]
+radius = 1.0
+height = 2.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51wfu"]
 atlas = ExtResource("1_0m2uo")
@@ -58,17 +58,36 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="OrePile" type="RigidBody2D"]
-script = ExtResource("1_x7vmn")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ddhv5"]
+radius = 14.0
+height = 54.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_r6omw")
+[node name="DroppedItem" type="RigidBody2D"]
+script = ExtResource("1_dwcog")
+
+[node name="ItemShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_8qijk")
 
 [node name="PileShape" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -32)
 sprite_frames = SubResource("SpriteFrames_8pkas")
-animation = &"COAL"
+animation = &"MAGNESIUM"
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollectionArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+position = Vector2(0, -12)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ddhv5")
+
+[node name="ColorRect" type="ColorRect" parent="CollectionArea/CollisionShape2D"]
+offset_left = -15.0
+offset_top = -27.0
+offset_right = 13.0
+offset_bottom = 28.0
+color = Color(1, 1, 1, 0.509804)
+
+[connection signal="area_entered" from="CollectionArea" to="." method="_on_collection_area_area_entered"]
+[connection signal="body_entered" from="CollectionArea" to="." method="_on_collection_area_body_entered"]
