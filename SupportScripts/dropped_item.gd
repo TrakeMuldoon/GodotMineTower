@@ -18,15 +18,24 @@ func SetVals(type, value):
 # Called when the node enters the scene tree for the first time.
 var summoning_sickness = true
 func _ready():
+	linear_velocity = Vector2i.ZERO
 	var timer := Timer.new()
 	add_child(timer)
-	timer.wait_time = 0.1
+	timer.wait_time = 0.05
 	timer.one_shot = true
 	timer.connect("timeout", _on_timer_timeout)
 	timer.start()
 	$PileShape.animation = ore_type
 	pass
-	
+
+func _integrate_forces(state):
+	angular_velocity = 0
+	rotation = 0
+
+func _physics_process(delta):
+	if summoning_sickness:
+		linear_velocity = Vector2i.ZERO
+
 func _on_timer_timeout() -> void:
 	summoning_sickness = false
 
@@ -34,14 +43,10 @@ func _on_timer_timeout() -> void:
 func _process(delta):
 	pass
 
-func _on_collection_area_area_entered(area):
-	pass
-
-
 func _on_collection_area_body_entered(body):
 	if summoning_sickness:
 		return
-	var areas = $CollectionArea.get_overlapping_areas()
+	#var areas = $CollectionArea.get_overlapping_areas()
 	var nodes = $CollectionArea.get_overlapping_bodies()
 	if nodes.size() > 0:
 		pickup_attempt.emit(ore_type, amount)

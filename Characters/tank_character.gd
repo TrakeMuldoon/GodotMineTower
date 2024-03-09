@@ -132,14 +132,12 @@ func Get_My_Cell():
 	return l2m
 
 func Build_Wall_Maybe():
-	if $Headroom.has_overlapping_bodies():
-		return
-
-	var my_loc = Get_My_Cell()
-	
+	if $Headroom.has_overlapping_bodies(): 
+		return # Can't move up, so can't build
+		
+	var my_loc = Get_My_Cell() # Find position wall should be
 	position.y -= 64 # move me out of the way
-	
-	build_wall.emit(my_loc)
+	build_wall.emit(my_loc) # Tell wall to be built
 
 func Drill_Down():
 	velocity.y = Boost_Velocity * 0.1
@@ -167,7 +165,7 @@ func ResetLocationAndDropInventory():
 		while amount > 0:
 			var pile = 50 if amount > 50 else amount
 			amount -= 50
-			curr_place = Vector2(curr_place.x + 8, curr_place.y - 8)
+			curr_place = Vector2(curr_place.x + 4, curr_place.y - 6)
 			create_ore_pile(ore, pile, curr_place)
 
 	$MovingNotifier.EnqueueMessage("Inventory Dropped")

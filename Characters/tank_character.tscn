@@ -83,19 +83,20 @@ height = 60.0
 radius = 7.07107
 
 [node name="BackupCharacter" type="CharacterBody2D"]
+collision_layer = 3
 script = ExtResource("1_p4ov2")
 
 [node name="MarkPos" type="Marker2D" parent="."]
 position = Vector2(3, 20)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_8i8wp")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("4_dp4cy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

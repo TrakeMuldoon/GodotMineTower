@@ -14,7 +14,7 @@ func debug_stuff():
 	add_to_inventory("IRON", 5)
 	add_to_inventory("COPPER", 5)
 	add_to_inventory("MAGNESIUM", 5)
-	add_to_inventory("SILVER", 5)
+	#add_to_inventory("SILVER", 5)
 
 func add_to_inventory(label, count):
 	if count + held_count > max:

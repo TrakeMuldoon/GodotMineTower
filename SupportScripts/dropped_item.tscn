@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://c32qe801ka5ug" path="res://assets/OrePiles.png" id="1_0m2uo"]
 [ext_resource type="Script" path="res://SupportScripts/dropped_item.gd" id="1_dwcog"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8qijk"]
-radius = 1.0
-height = 2.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2h76b"]
+radius = 0.5
+height = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51wfu"]
 atlas = ExtResource("1_0m2uo")
@@ -67,7 +67,8 @@ script = ExtResource("1_dwcog")
 
 [node name="ItemShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_8qijk")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2h76b")
 
 [node name="PileShape" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -32)
@@ -83,11 +84,11 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ddhv5")
 
 [node name="ColorRect" type="ColorRect" parent="CollectionArea/CollisionShape2D"]
+visible = false
 offset_left = -15.0
 offset_top = -27.0
 offset_right = 13.0
 offset_bottom = 28.0
 color = Color(1, 1, 1, 0.509804)
 
-[connection signal="area_entered" from="CollectionArea" to="." method="_on_collection_area_area_entered"]
 [connection signal="body_entered" from="CollectionArea" to="." method="_on_collection_area_body_entered"]
