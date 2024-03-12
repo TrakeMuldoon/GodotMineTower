@@ -19,11 +19,11 @@ script = ExtResource("7_d317y")
 [node name="StartPosition" type="Marker2D" parent="."]
 
 [node name="Warehouse" parent="." instance=ExtResource("3_h2g8o")]
-position = Vector2(800, 0)
+position = Vector2(1550, 0)
 scale = Vector2(3, 3)
 
 [node name="GasStation" parent="." instance=ExtResource("6_7o2mp")]
-position = Vector2(1365, -134)
+position = Vector2(2005, 0)
 scale = Vector2(2, 2)
 
 [node name="TankCharacter" parent="." instance=ExtResource("3_t8821")]

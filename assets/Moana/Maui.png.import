@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dga0qiyomasi7"
-path="res://.godot/imported/Maui.png-4ff213b858e464ba695df3b84ef8b5b4.ctex"
+path="res://.godot/imported/Maui.png-f78d29eda295b32a7c4bf5f28bfaa88b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Maui.png"
-dest_files=["res://.godot/imported/Maui.png-4ff213b858e464ba695df3b84ef8b5b4.ctex"]
+source_file="res://assets/Moana/Maui.png"
+dest_files=["res://.godot/imported/Maui.png-f78d29eda295b32a7c4bf5f28bfaa88b.ctex"]
 
 [params]
 

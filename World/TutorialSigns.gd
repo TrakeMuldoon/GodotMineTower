@@ -6,9 +6,9 @@ func _ready():
 	create_sprites(0, 0, 2, 0)
 	create_sprites(0, 1, 2, 250)
 	create_sprites(0, 2, 2, 500)
-	create_sprites(1, 0, 2, 750)
-	create_sprites(1, 1, 1, 1000)
-	create_sprites(1, 2, 1, 1250)
+	create_sprites(1, 1, 1, 750)
+	create_sprites(1, 2, 1, 1000)
+	create_sprites(1, 0, 2, 1250)
 
 
 func create_sprites(row, col, stand, x_offset):

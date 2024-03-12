@@ -86,9 +86,9 @@ func _physics_process(delta):
 		velocity.x = direction * Speed
 
 		if velocity.x < 0:
-			$AnimatedSprite2D.flip_h = true
+			$AnimatedTank.flip_h = true
 		else:
-			$AnimatedSprite2D.flip_h = false
+			$AnimatedTank.flip_h = false
 	else:
 		ACTION_TIMER.Reset("DrillSide")
 		velocity.x = move_toward(velocity.x, 0, Speed)
