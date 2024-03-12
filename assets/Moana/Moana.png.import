@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxj1u1557iika"
-path="res://.godot/imported/Moana.png-cf330044007dfc26d841329cb068ff5d.ctex"
+path="res://.godot/imported/Moana.png-2c993d2af9900d3b920a9e3aad3fd659.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Moana.png"
-dest_files=["res://.godot/imported/Moana.png-cf330044007dfc26d841329cb068ff5d.ctex"]
+source_file="res://assets/Moana/Moana.png"
+dest_files=["res://.godot/imported/Moana.png-2c993d2af9900d3b920a9e3aad3fd659.ctex"]
 
 [params]
 

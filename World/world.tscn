@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ikyyrfbbl6mg"]
+[gd_scene load_steps=8 format=3 uid="uid://ikyyrfbbl6mg"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_s4pm6"]
 [ext_resource type="PackedScene" uid="uid://f6l3he8ki1b4" path="res://TileSets/worldlevel.tscn" id="2_ufl5l"]
@@ -6,20 +6,24 @@
 [ext_resource type="PackedScene" uid="uid://bhd3na60mj5w0" path="res://Characters/tank_character.tscn" id="3_t8821"]
 [ext_resource type="PackedScene" uid="uid://caewvun7a74qq" path="res://HUD/hud.tscn" id="4_xx605"]
 [ext_resource type="PackedScene" uid="uid://cpqctqefpo5va" path="res://Buildings/gas_station.tscn" id="6_7o2mp"]
+[ext_resource type="Script" path="res://World/TutorialSigns.gd" id="7_d317y"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_s4pm6")
 
 [node name="WorldLevel" parent="." instance=ExtResource("2_ufl5l")]
 
+[node name="TutorialSigns" type="Marker2D" parent="."]
+script = ExtResource("7_d317y")
+
 [node name="StartPosition" type="Marker2D" parent="."]
 
 [node name="Warehouse" parent="." instance=ExtResource("3_h2g8o")]
-position = Vector2(500, 0)
+position = Vector2(1550, 0)
 scale = Vector2(3, 3)
 
 [node name="GasStation" parent="." instance=ExtResource("6_7o2mp")]
-position = Vector2(1065, -134)
+position = Vector2(2005, 0)
 scale = Vector2(2, 2)
 
 [node name="TankCharacter" parent="." instance=ExtResource("3_t8821")]

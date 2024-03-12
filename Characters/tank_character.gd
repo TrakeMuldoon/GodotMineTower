@@ -14,7 +14,7 @@ var FuelTankSize = StartFuelTankSize
 var fuel = FuelTankSize
 var fuel_decrease = 5
 
-var reset_position = Vector2.ZERO
+var reset_position = Vector2(1500, 0)
 
 var dropped_item: PackedScene = preload("res://SupportScripts/dropped_item.tscn")
 var ore_drop_offset = Vector2(0, 16)
@@ -38,9 +38,9 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_pressed("Return"):
-		ACTION_TIMER.ExecOnElapsed("Reset", ResetLocationAndDropInventory)
+		ACTION_TIMER.ExecOnElapsed("Teleport", ResetLocationAndDropInventory)
 	else:
-		ACTION_TIMER.Reset("Reset")
+		ACTION_TIMER.Reset("Teleport")
 	
 	if Input.is_action_just_pressed("Mark"):
 		var cell = Get_My_Cell()
@@ -86,9 +86,9 @@ func _physics_process(delta):
 		velocity.x = direction * Speed
 
 		if velocity.x < 0:
-			$AnimatedSprite2D.flip_h = true
+			$AnimatedTank.flip_h = true
 		else:
-			$AnimatedSprite2D.flip_h = false
+			$AnimatedTank.flip_h = false
 	else:
 		ACTION_TIMER.Reset("DrillSide")
 		velocity.x = move_toward(velocity.x, 0, Speed)

@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://d4ig3rk6l42ff" path="res://assets/MineBird.png" id="1_nnluh"]
 [ext_resource type="Script" path="res://Characters/tank_character.gd" id="1_p4ov2"]
-[ext_resource type="Texture2D" uid="uid://475h7n4sr8n0" path="res://assets/Rapunzel.png" id="3_jhqsu"]
+[ext_resource type="Texture2D" uid="uid://475h7n4sr8n0" path="res://assets/Moana/Rapunzel.png" id="3_jhqsu"]
 [ext_resource type="PackedScene" uid="uid://rvxuc2x54cmw" path="res://SupportScripts/moving_notifier.tscn" id="4_1iggp"]
-[ext_resource type="Texture2D" uid="uid://cxj1u1557iika" path="res://assets/Moana.png" id="4_dp4cy"]
+[ext_resource type="Texture2D" uid="uid://cxj1u1557iika" path="res://assets/Moana/Moana.png" id="4_dp4cy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6r37p"]
 atlas = ExtResource("1_nnluh")
@@ -89,14 +89,14 @@ script = ExtResource("1_p4ov2")
 [node name="MarkPos" type="Marker2D" parent="."]
 position = Vector2(3, 20)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
+[node name="AnimatedTank" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_8i8wp")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("4_dp4cy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

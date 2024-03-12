@@ -1,7 +1,6 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bo1kk6u7y33d7"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bo1kk6u7y33d7"]
 
 [ext_resource type="Texture2D" uid="uid://bumvg8nmcytv6" path="res://assets/UndergroundTileset.png" id="1_2cwml"]
-[ext_resource type="Texture2D" uid="uid://c8xojlijn3ath" path="res://assets/TestTileset.png" id="2_jyumg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ejd78"]
 texture = ExtResource("1_2cwml")
@@ -157,7 +156,6 @@ texture = ExtResource("1_2cwml")
 2:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08wd4"]
-texture = ExtResource("2_jyumg")
 0:0/next_alternative_id = 5
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)

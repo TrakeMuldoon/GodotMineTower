@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8xojlijn3ath"
-path="res://.godot/imported/TestTileset.png-979883206038a70214cb127f56394f46.ctex"
+uid="uid://capjfhrm6xa6d"
+path="res://.godot/imported/TutorialSigns.png-ab660bdfe5e807216ac20f0c92096803.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/TestTileset.png"
-dest_files=["res://.godot/imported/TestTileset.png-979883206038a70214cb127f56394f46.ctex"]
+source_file="res://assets/TutorialSigns.png"
+dest_files=["res://.godot/imported/TutorialSigns.png-ab660bdfe5e807216ac20f0c92096803.ctex"]
 
 [params]
 

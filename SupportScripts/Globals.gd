@@ -19,6 +19,8 @@ var ORE_COST_PER_MINE = 0
 var ORE_PILES = []
 var PILES_PICKED_UP = {}
 
+var TownBottomLeft = Vector2(1500, 0)
+
 enum UNDERGROUND_RESOURCES {
 	DIRT,
 	COAL,

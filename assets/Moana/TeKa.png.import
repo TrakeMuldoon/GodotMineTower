@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ov066r46lq8m"
-path="res://.godot/imported/TeFiti.png-09eafc060dba3c842142c7469c461311.ctex"
+uid="uid://bs2amwi05tkpk"
+path="res://.godot/imported/TeKa.png-4fb4260fa135cf5af54657a85c4baa1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/TeFiti.png"
-dest_files=["res://.godot/imported/TeFiti.png-09eafc060dba3c842142c7469c461311.ctex"]
+source_file="res://assets/Moana/TeKa.png"
+dest_files=["res://.godot/imported/TeKa.png-4fb4260fa135cf5af54657a85c4baa1e.ctex"]
 
 [params]
 

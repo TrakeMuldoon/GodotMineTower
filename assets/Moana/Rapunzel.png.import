@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dga0qiyomasi7"
-path="res://.godot/imported/Maui.png-4ff213b858e464ba695df3b84ef8b5b4.ctex"
+uid="uid://475h7n4sr8n0"
+path="res://.godot/imported/Rapunzel.png-e9665dac54d151ea73863021fd77cabe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Maui.png"
-dest_files=["res://.godot/imported/Maui.png-4ff213b858e464ba695df3b84ef8b5b4.ctex"]
+source_file="res://assets/Moana/Rapunzel.png"
+dest_files=["res://.godot/imported/Rapunzel.png-e9665dac54d151ea73863021fd77cabe.ctex"]
 
 [params]
 

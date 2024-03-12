@@ -19,16 +19,17 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_018s5"]
-size = Vector2(128, 101)
+size = Vector2(127, 101)
 
 [node name="GasStation" type="Area2D"]
 script = ExtResource("1_ag5o7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_fbx28")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 15.5)
+position = Vector2(0, -50)
 shape = SubResource("RectangleShape2D_018s5")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
