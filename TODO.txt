@@ -16,15 +16,6 @@ Abstract Notifier
 Drop Ore on Floor
 - When you mine something and the tank is full.
 
---DONE ^
-
-Helper Hover Notifications for Buildings
- - Each Building should have a helper notification
-
-Move all Notifications to Tank
-
-Clean up HUD
-
 Tutorial Signs
 - Move all the buildings
 - Ability to change "Respawn" spot (surface only)
@@ -35,6 +26,17 @@ Tutorial Signs
 	x"hold Z to build a wall (costs resource)"
 	x"hold M to build a mine (costs 10x resource)"
 	"interact with a building E"
+
+--DONE ^
+
+Helper Hover Notifications for Buildings
+ - Each Building should have a helper notification
+
+Move all Notifications to Tank
+
+Clean up HUD
+
+When generating terrain, respect the globals
 
 Mine-income 
 - Mines generate consistent income with some animation
