@@ -13,25 +13,28 @@ Fuel Station
 Abstract Notifier
 - Too much work is being done in every class
 
---DONE ^
-
 Drop Ore on Floor
 - When you mine something and the tank is full.
 
+--DONE ^
+
 Helper Hover Notifications for Buildings
  - Each Building should have a helper notification
+
+Move all Notifications to Tank
 
 Clean up HUD
 
 Tutorial Signs
 - Move all the buildings
 - Ability to change "Respawn" spot (surface only)
-	"AD or < > to move Left and Right"
-	"A,S,D or < V > to Drill"
-	"W to jet up (uses fuel)"
-	"hold R to return to surface (LOSE INVENTORY)"
-	"hold Z to build a wall (costs resource)"
-	"hold M to build a mine (costs 10x resource)"
+	x"AD or < > to move Left and Right"
+	x"A,S,D or < V > to Drill"
+	x"W to jet up (uses fuel)"
+	x"hold T to return to surface (LOSE INVENTORY)"
+	x"hold Z to build a wall (costs resource)"
+	x"hold M to build a mine (costs 10x resource)"
+	"interact with a building E"
 
 Mine-income 
 - Mines generate consistent income with some animation
@@ -85,5 +88,8 @@ Caves/Mansions/Clouds
 Dirt Layers
 	Each with their own drill speed, ore propportions
 
+-Fix "Drill" tutorial Sign
+
 Sky
 - Create the cloud world!
+
