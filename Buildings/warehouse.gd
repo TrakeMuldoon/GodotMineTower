@@ -27,8 +27,10 @@ func MoveInventory():
 
 func _on_body_entered(body):
 	check_for_input = true
+	$Instruction.show()
 	entered_warehouse.emit()
 
 func _on_body_exited(body):
 	check_for_input = false
+	$Instruction.hide()
 	Globals.ACTION_TIMER.Reset("BuildingInteract")

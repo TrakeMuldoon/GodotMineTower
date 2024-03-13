@@ -32,5 +32,13 @@ sprite_frames = SubResource("SpriteFrames_fbx28")
 position = Vector2(0, -52)
 shape = SubResource("RectangleShape2D_018s5")
 
+[node name="Instruction" type="Label" parent="."]
+offset_left = -44.0
+offset_top = -85.0
+offset_right = 188.0
+offset_bottom = -62.0
+theme_override_font_sizes/font_size = 10
+text = "Hold \"E\" to refuel"
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
