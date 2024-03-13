@@ -250,3 +250,7 @@ func _on_gas_station_fill_gastank():
 	var fuel_percent = float(fuel) / FuelTankSize
 	fuel_modified.emit(fuel_percent)
 	$MovingNotifier.EnqueueMessage("Fueeled up!")
+
+
+func _on_warehouse_moved_inventory(text):
+	$MovingNotifier.EnqueueMessage(text)
