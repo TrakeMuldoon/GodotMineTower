@@ -19,7 +19,7 @@ func SetVals(type, value):
 var summoning_sickness = true
 func _ready():
 	linear_velocity = Vector2i.ZERO
-	set_timeout(0.05)
+	set_timeout(0.03)
 
 	$PileShape.animation = ore_type
 	pass

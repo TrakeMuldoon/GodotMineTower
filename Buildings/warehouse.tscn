@@ -31,7 +31,7 @@ sprite_frames = SubResource("SpriteFrames_1mdxn")
 animation = &"Building"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, -46)
+position = Vector2(4, -47)
 shape = SubResource("RectangleShape2D_2b33i")
 
 [node name="MovingNotifier" type="Node2D" parent="."]
