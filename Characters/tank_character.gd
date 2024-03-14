@@ -105,14 +105,21 @@ func _physics_process(delta):
 
 	character_moved.emit(position)
 
+var i_panel = null
 func ShowPlayerInventory():
-	var my_popup = Popup.new()
-	my_popup.title = "huh? wat?"
-	my_popup.unresizable = false
-	my_popup.size = Vector2i(200, 500)
-	my_popup.borderless = false
-	add_child(my_popup)
-	my_popup.popup_centered()
+	if i_panel != null:
+		return
+		
+	i_panel = Inventory_Panel.new()
+	add_child(i_panel)
+	i_panel.popup_centered()
+	i_panel.show()
+	i_panel.connect("close_requested", Clear_I_Panel)
+	i_panel.connect("popup_hide", Clear_I_Panel)
+
+func Clear_I_Panel():
+	i_panel.queue_free()
+	i_panel = null
 
 func Jump():
 	if fuel < fuel_decrease:
@@ -192,7 +199,6 @@ func ResetLocationAndDropInventory():
 
 func DropMyInventoryIntoPiles(drop_pos):
 	var inventory = Globals.TANK_INVENTORY.clear_inventory()
-	
 	DropInventoryIntoPiles(inventory, drop_pos)
 	$MovingNotifier.EnqueueMessage("Inventory Dropped")
 

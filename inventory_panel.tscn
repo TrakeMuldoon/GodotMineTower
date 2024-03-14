@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuh2kycwsfvl8"]
+
+[ext_resource type="Script" path="res://inventory_panel.gd" id="1_elvym"]
+
+[node name="InventoryPanel" type="PopupPanel"]
+visible = true
+borderless = false
+extend_to_title = true
+script = ExtResource("1_elvym")

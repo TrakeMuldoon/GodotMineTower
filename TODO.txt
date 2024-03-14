@@ -30,9 +30,9 @@ Tutorial Signs
 Helper Hover Notifications for Buildings
  - Each Building should have a helper notification
 
---DONE ^
-
 Move all Notifications to Tank
+
+-------------DONE ^
 
 Clean up HUD
 
