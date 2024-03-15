@@ -32,9 +32,9 @@ Helper Hover Notifications for Buildings
 
 Move all Notifications to Tank
 
--------------DONE ^
-
 Clean up HUD
+
+-------------DONE ^
 
 When generating terrain, respect the globals
 

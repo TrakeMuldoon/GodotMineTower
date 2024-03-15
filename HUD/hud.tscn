@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://caewvun7a74qq"]
+[gd_scene load_steps=2 format=3 uid="uid://caewvun7a74qq"]
 
 [ext_resource type="Script" path="res://HUD/hud.gd" id="1_bk74e"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ki71c"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_bk74e")
@@ -64,7 +62,3 @@ offset_top = 2.0
 offset_right = 1150.0
 offset_bottom = 303.0
 columns = 2
-
-[node name="TextureRect" type="TextureRect" parent="WorldInventoryGrid"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_ki71c")
