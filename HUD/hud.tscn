@@ -57,7 +57,7 @@ offset_right = 392.0
 offset_bottom = 33.0
 
 [node name="WorldInventoryGrid" type="GridContainer" parent="."]
-offset_left = 1059.0
+offset_left = 999.0
 offset_top = 2.0
 offset_right = 1150.0
 offset_bottom = 303.0

@@ -25,6 +25,14 @@ func add_to_inventory(label, count):
 	inventory_modified.emit()
 	return count - can_fit
 
+func unsafe_add_to_inventory_delayed(label, count):
+	if not label in ores_held:
+		ores_held[label] = 0.0
+	ores_held[label] += count
+
+func fire_modified():
+	inventory_modified.emit()
+
 func remove_from_inventory(label):
 	var value = ores_held[label]
 	ores_held.erase(label)

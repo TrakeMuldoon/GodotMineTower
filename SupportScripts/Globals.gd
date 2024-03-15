@@ -7,17 +7,18 @@ var CELL_SIZE = 64
 var CELLS_DRILLED = {}
 var WALLS_BUILT = {}
 var MINES_BUILT = {}
+var ORE_PILES = []
+var PILES_PICKED_UP = {}
 
 var ACTION_TIMEOUT = 30
 var ACTION_TIMER = ActionTimer.new(ACTION_TIMEOUT)
 
 var TANK_INVENTORY = Inventory.new(100)
-var GLOBAL_INVENTORY = Inventory.new(1000000)
+var GLOBAL_INVENTORY = Inventory.new(10000000)
 
 var ORE_PER_NODE_DRILLED = 5
 var ORE_COST_PER_MINE = 0
-var ORE_PILES = []
-var PILES_PICKED_UP = {}
+var MINE_MANAGER
 
 var TownBottomLeft = Vector2(1500, 0)
 
@@ -29,3 +30,5 @@ enum UNDERGROUND_RESOURCES {
 	MAGNESIUM
 }
 
+func _ready():
+	MINE_MANAGER = MineManager.new(5)

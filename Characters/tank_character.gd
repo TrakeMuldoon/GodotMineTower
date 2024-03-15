@@ -142,6 +142,8 @@ func Build_Mine_Maybe():
 		Build_Mine(my_cell)
 
 func Build_Mine(my_cell):
+	var ore = tilemap.Get_Ore_Type(my_cell)
+	Globals.MINE_MANAGER.Add_Mine(ore, 1)
 	build_mine.emit(my_cell)
 
 func Get_My_Cell():
