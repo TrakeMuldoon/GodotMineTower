@@ -22,18 +22,43 @@ signal found_ore
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	BUILD_TUTORIAL_TERRAIN()
+
+func BUILD_TUTORIAL_TERRAIN():
+	for x in range(-2, 50):
+		Globals.WALLS_BUILT[Vector2(x,0)] = null
+	Globals.WALLS_BUILT.erase(Vector2(7,0))
+	Globals.WALLS_BUILT.erase(Vector2(12,0))
+	Globals.WALLS_BUILT.erase(Vector2(13,0))
+	
+	Globals.CELLS_DRILLED[Vector2(12,0)] = null
+	Globals.CELLS_DRILLED[Vector2(13,0)] = null
+	Globals.CELLS_DRILLED[Vector2(12,1)] = null
+	Globals.CELLS_DRILLED[Vector2(13,1)] = null
+	
 
 func CreateInitialTileMap():
 	for x in range(-50, 50):
 		for y in range(0, 50):
-			var munge_float = munge_three(x,y)
-			
-			var tile_location_and_alt = PickGroundType(munge_float)
+			var target = Vector2(x,y)
+			var tile_location_and_alt = null
+			if target in Globals.WALLS_BUILT:
+				tile_location_and_alt = Vector3(WALL_TILE.x, WALL_TILE.y, 0)
+			elif target in Globals.CELLS_DRILLED:
+				tile_location_and_alt = Vector3(DRILLED_TILE.x, DRILLED_TILE.y, 0)
+			else:
+				tile_location_and_alt = get_random_tile(x, y)
+
 			var tile_location = Vector2(tile_location_and_alt.x, tile_location_and_alt.y)
 			var alt = tile_location_and_alt.z
 			
-			set_cell(0, Vector2(x, y), id, tile_location, alt)
+			set_cell(0, target, id, tile_location, alt)
+
+func get_random_tile(x,y):
+	var munge_float = munge_three(x,y)
+	var tile_location_and_alt = PickGroundType(munge_float)
+	return tile_location_and_alt
+
 
 func Can_Build_At(cell):
 	var curr = get_cell_atlas_coords(0, cell)
