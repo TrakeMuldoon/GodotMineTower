@@ -26,9 +26,38 @@ func _on_backup_character_character_moved(pos):
 	$PlayerLocation.text = "Player Location:\n" + str(pos) + "\n" + str(modPosition) + "\n" + str(l2m)  
 
 
+var ore_tracker = {}
 func _on_inventory_modified():
 	$TankInventory.text = Globals.TANK_INVENTORY.HUD_printout()
 	$WorldInventory.text = Globals.GLOBAL_INVENTORY.HUD_printout()
+	var ore_list = Globals.GLOBAL_INVENTORY.get_ores()
+	for ore in ore_list:
+		var val = Globals.GLOBAL_INVENTORY.get_value(ore)
+		if not ore in ore_tracker:
+			var ore_sprite = get_ore_sprite(ore)
+			$WorldInventoryGrid.add_child(ore_sprite)
+			var label = Label.new()
+			$WorldInventoryGrid.add_child(label)
+			ore_tracker[ore] = label
+		ore_tracker[ore].text = str(val) 
+
+
+var ore_texture = load("res://assets/UndergroundTileset.png")
+var ore_sprite_size = Vector2(16,16)
+func get_ore_sprite(orename):
+	var sprite_sheet_row = 0
+	match orename:
+		"COAL": sprite_sheet_row = 1
+		"COPPER": sprite_sheet_row = 2
+		"IRON": sprite_sheet_row = 3
+		"MAGNESIUM": sprite_sheet_row = 4
+		_: sprite_sheet_row = 0
+	var sprite = TextureRect.new()
+	var tex_subregion = AtlasTexture.new()
+	tex_subregion.set_atlas(ore_texture)
+	tex_subregion.set_region(Rect2(4 * 16, sprite_sheet_row * 16, 16, 16))
+	sprite.texture = tex_subregion
+	return sprite
 
 func _on_tank_character_fuel_modified(fuel_percentage):
 	$FuelTank.value = fuel_percentage * 100
