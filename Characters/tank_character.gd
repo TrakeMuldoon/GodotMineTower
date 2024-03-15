@@ -17,7 +17,6 @@ var fuel_decrease = 5
 var reset_position = Vector2(1500, 0)
 
 var dropped_item: PackedScene = preload("res://SupportScripts/dropped_item.tscn")
-var ore_drop_offset = Vector2(0, 16)
 
 signal character_moved
 signal drilled
@@ -72,9 +71,16 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("go_left", "go_right")
 	
+	if Input.is_action_just_pressed("Inventory"):
+		ShowPlayerInventory()
+	
+	if Input.is_action_just_pressed("RingOfDebug"):
+		ShowRingOfDebug()
+	
 	#TODO: Split moving and drilling into separate code chunks.
 	# move actionss up top
 	if direction:
+		#Drill Related Stuff
 		if is_on_wall() and is_on_floor():
 			if ACTION_TIMER.CounterElapsed("DrillSide"):
 				Drill_Side(direction)
@@ -83,6 +89,8 @@ func _physics_process(delta):
 				ACTION_TIMER.Increment("DrillSide")
 		else:
 			ACTION_TIMER.Reset("DrillSide")
+			
+		#Movement related stuff
 		velocity.x = direction * Speed
 
 		if velocity.x < 0:
@@ -97,6 +105,21 @@ func _physics_process(delta):
 
 	character_moved.emit(position)
 
+var i_panel = null
+func ShowPlayerInventory():
+	if i_panel != null:
+		return
+		
+	i_panel = Inventory_Panel.new()
+	add_child(i_panel)
+	i_panel.popup_centered()
+	i_panel.show()
+	i_panel.connect("close_requested", Clear_I_Panel)
+	i_panel.connect("popup_hide", Clear_I_Panel)
+
+func Clear_I_Panel():
+	i_panel.queue_free()
+	i_panel = null
 
 func Jump():
 	if fuel < fuel_decrease:
@@ -159,30 +182,61 @@ func _on_world_level_found_ore(ore_name):
 		create_ore_pile(ore_name, cant_fit, position + ore_drop_offset)
 
 func ResetLocationAndDropInventory():
-	var original_position = position
-	position = reset_position
-	DropInventoryIntoPiles(original_position + ore_drop_offset)
+	var my_cell = Get_My_Cell()
 
-func DropInventoryIntoPiles(drop_pos):
+	var old_pos = position
+	position = reset_position
+
+	var the_x = old_pos.x / 64 if old_pos.x > 0 else (old_pos.x / 64) - 1
+	var the_y = (old_pos.y / 64) + 1 if old_pos.y > 0 else (old_pos.y / 64)
+	
+	the_x = float(int(the_x) * 64)
+	the_y = float(int(the_y) * 64)
+	var m2l = Vector2(the_x, the_y)
+	
+	call_deferred("DropMyInventoryIntoPiles", m2l + ore_drop_offset)
+
+
+func DropMyInventoryIntoPiles(drop_pos):
 	var inventory = Globals.TANK_INVENTORY.clear_inventory()
+	DropInventoryIntoPiles(inventory, drop_pos)
+	$MovingNotifier.EnqueueMessage("Inventory Dropped")
+
+func DropInventoryIntoPiles(inv, drop_pos):
 	var curr_place = drop_pos
-	for ore in inventory:
-		var amount = inventory[ore]
+	for ore in inv:
+		var amount = inv[ore]
 		while amount > 0:
 			var pile = 50 if amount > 50 else amount
 			amount -= 50
-			curr_place = Vector2(curr_place.x + 4, curr_place.y)
-			create_ore_pile(ore, pile, curr_place)
-
-	$MovingNotifier.EnqueueMessage("Inventory Dropped")
+			curr_place = Vector2(curr_place.x + DROPOFFSET, curr_place.y - DROPOFFSET)
+			call_deferred("create_ore_pile", ore, pile, curr_place)
 
 func create_ore_pile(ore_name, amount, location):
 	var item = dropped_item.instantiate()
 	item.SetVals(ore_name, amount)
 	item.position = location
-	get_parent().add_child(item)
+	get_parent().call_deferred("add_child", item)
 	item.pickup_attempt.connect(ore_pile_entered)
+
+@export var DROPOFFSET = 10
+var ore_drop_offset = Vector2(0, 0)
+func ShowRingOfDebug():
+	var fake_inventory = Inventory.new(100).clear_inventory()
+	var start_pos = position
 	
+	var the_x = start_pos.x / 64 if start_pos.x > 0 else (start_pos.x / 64) - 1
+	var the_y = (start_pos.y / 64) + 1 if start_pos.y > 0 else (start_pos.y / 64)
+	
+	the_x = float(int(the_x) * 64)
+	the_y = float(int(the_y) * 64)
+	the_x += 64
+	
+	var m2l = Vector2(the_x, the_y)
+	
+	DropInventoryIntoPiles(fake_inventory, m2l)
+	
+
 func ore_pile_entered(drop_item, ore_type, number):
 	var inv = Globals.TANK_INVENTORY
 	var cant_fit = inv.add_to_inventory(ore_type, number)
@@ -197,9 +251,12 @@ func ore_pile_entered(drop_item, ore_type, number):
 	else:
 		drop_item.queue_free()
 
-
 func _on_gas_station_fill_gastank():
 	fuel = FuelTankSize
 	var fuel_percent = float(fuel) / FuelTankSize
 	fuel_modified.emit(fuel_percent)
 	$MovingNotifier.EnqueueMessage("Fueeled up!")
+
+
+func _on_warehouse_moved_inventory(text):
+	$MovingNotifier.EnqueueMessage(text)

@@ -31,12 +31,20 @@ sprite_frames = SubResource("SpriteFrames_1mdxn")
 animation = &"Building"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, -46)
+position = Vector2(4, -47)
 shape = SubResource("RectangleShape2D_2b33i")
 
 [node name="MovingNotifier" type="Node2D" parent="."]
 position = Vector2(34, -32)
 script = ExtResource("3_2s8h0")
+
+[node name="Instruction" type="Label" parent="."]
+offset_left = -59.0
+offset_top = -91.0
+offset_right = 173.0
+offset_bottom = -68.0
+theme_override_font_sizes/font_size = 9
+text = "Hold \"E\" to Transfer Inventory"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

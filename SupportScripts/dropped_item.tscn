@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://SupportScripts/dropped_item.gd" id="1_dwcog"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2h76b"]
-radius = 0.5
-height = 1.0
+radius = 0.005
+height = 0.01
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51wfu"]
 atlas = ExtResource("1_0m2uo")
@@ -63,6 +63,7 @@ radius = 14.0
 height = 54.0
 
 [node name="DroppedItem" type="RigidBody2D"]
+mass = 0.2
 script = ExtResource("1_dwcog")
 
 [node name="ItemShape" type="CollisionShape2D" parent="."]

@@ -27,14 +27,14 @@ Tutorial Signs
 	x"hold M to build a mine (costs 10x resource)"
 	"interact with a building E"
 
---DONE ^
-
 Helper Hover Notifications for Buildings
  - Each Building should have a helper notification
 
 Move all Notifications to Tank
 
 Clean up HUD
+
+-------------DONE ^
 
 When generating terrain, respect the globals
 

@@ -19,8 +19,10 @@ func FillTank():
 	fill_gastank.emit()
 
 func _on_body_entered(body):
+	$Instruction.show()
 	check_for_input = true
 
 func _on_body_exited(body):
+	$Instruction.hide()
 	check_for_input = false
 	Globals.ACTION_TIMER.Reset("BuildingInteract")

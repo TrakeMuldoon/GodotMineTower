@@ -37,6 +37,9 @@ func get_ores():
 	for ore in ores_held:
 		ore_list.append(ore)
 	return ore_list
+	
+func get_value(ore):
+	return ores_held[ore]
 
 func clear_inventory():
 	var previous_inventory = ores_held
